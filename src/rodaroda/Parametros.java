@@ -67,62 +67,48 @@ public class Parametros {
         double numero_aleatorio;
         int numeroSorteado;
         String tema = "";
-        Scanner sc;
-        sc = new Scanner(System.in);
         
         numero_aleatorio = Math.random() * 3;
         numero_aleatorio = Math.floor(numero_aleatorio);
         numeroSorteado = (int) numero_aleatorio;
         
         switch (numeroSorteado) {//Provisório, posteriormente vai pegar de um arquivo de texto em disco.
-            case 1:
+            case 0:
                 tema = "Animais";
-                return tema;
                 break;
-            case 2:
+            case 1:
                 tema = "Carros";
-                return tema;
                 break;
-            case 3: 
+            case 2: 
                 tema = "Profissões";
-                return tema;
                 break;
-        }   
-        
-
-        System.out.println("Informe a Quantidade de jogadores");
-        qtdeJogadores = sc.nextInt();
-
-        while ((qtdeJogadores < 1) || (qtdeJogadores > 3)) {
-            System.out.println("Por favor, escolha o número de jogadores. Minimo 1 e Máximo 3.");
-            qtdeJogadores = sc.nextInt();
+            default:
+                System.out.println("Erro no sistema, opção de tema fora de escopo");
         }
-
-        return qtdeJogadores;
+        return tema;
     }
+
 
     public String[] Jogadores(int quantidade) {
         Scanner sc = new Scanner(System.in);
         int qtdeRecebida = quantidade;
-        String nomeJogadores[] = new String[3];
+        String nomeJogadores[] = new String[qtdeRecebida];
         String jogadorUm, jogadorDois, jogadorTres;
 
         for (int i = 0; i < qtdeRecebida; i++) {
             if (qtdeRecebida == 1) {
                 System.out.println("Informe o nome do jogador " + (i + 1) + ":");
                 jogadorUm = sc.nextLine();
-                nomeJogadores[i - 1] = jogadorUm;
+                nomeJogadores[i] = jogadorUm;
             } else if (qtdeRecebida == 2) {
                 System.out.println("Informe o nome do jogador " + (i + 1) + ":");
                 jogadorUm = sc.nextLine();
-                nomeJogadores[i - 1] = jogadorUm;
+                nomeJogadores[i] = jogadorUm;
                 i++;
 
                 System.out.println("Informe o nome do jogador " + (i + 1) + ":");
                 jogadorDois = sc.nextLine();
-                nomeJogadores[i - 1] = jogadorDois;
-                i++;
-
+                nomeJogadores[i] = jogadorDois;
             } else if (qtdeRecebida == 3) {
                 System.out.println("Informe o nome do jogador " + (i + 1) + ":");
                 jogadorUm = sc.nextLine();
@@ -140,11 +126,11 @@ public class Parametros {
                 i++;
             }
         }
-        for (int i = 0; i < nomeJogadores.length; i++){
-            System.out.println("");
-            System.out.println("Jogador "+(i + 1)+" : "+nomeJogadores[i]);
-            System.out.println("");
-        }
+//        for (int i = 0; i < nomeJogadores.length; i++){
+//            System.out.println("");
+//            System.out.println("Jogador "+(i + 1)+" : "+nomeJogadores[i]);
+//            System.out.println("");
+//        }
         
         
         return nomeJogadores;
