@@ -10,26 +10,8 @@ package rodaroda;
  * @author Kleudson
  * 
  */
-import java.util.*;
 
 public class Roleta {
-
-    private int numeroJogadores;
-
-    public int qtdeJogadores() {
-        Scanner sc;
-        sc = new Scanner(System.in);
-        
-        System.out.println("Informe a Quantidade de jogadores");
-        numeroJogadores = sc.nextInt();
-
-        while ((numeroJogadores < 1) || (numeroJogadores > 3)) {
-            System.out.println("Por favor, escolha o número de jogadores. Minimo 1 e Máximo 3.");
-            numeroJogadores = sc.nextInt();
-        }
-        
-        return numeroJogadores;
-    }
 
     public String sortear() {
 
