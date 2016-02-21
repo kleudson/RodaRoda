@@ -1,7 +1,7 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor. 
+ * and open the template in the editor.
  */
 package rodaroda;
 
@@ -67,11 +67,12 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        String sorteado;
+        String sorteioRoleta;
         String nomeUm;
         String nomeDois;
         String nomeTres;
         String tema;
+        String palavraSorteada;
         String[] vetorNomeJogadores;
         List<String> listPalavras;
         int qtdeJogadores, qtdeEtapas, qtdePalavras;
@@ -89,8 +90,18 @@ public class Main {
         tema = parametros.sortearTema();
         
         listPalavras = parametros.escolheArquivoTxt(tema);
+        
+        palavraSorteada = parametros.sortearPalavra(listPalavras);        
 
         vetorNomeJogadores = parametros.Jogadores(qtdeJogadores);
+        
+        System.out.println("");
+        System.out.println("Quantidade de jogadores escolhida é: " + qtdeJogadores);
+        System.out.println("Quantidade de etapas escolhida é: " + qtdeEtapas);
+        System.out.println("Quantidade de palavras escolhida é: " + qtdePalavras);
+        System.out.println("O tema escolhido aleatóriamente foi: " + tema);
+        System.out.println("A palavra sorteada foi: "+palavraSorteada);
+        System.out.println("");
 
         for (int i = 0; i < vetorNomeJogadores.length; i++) { //Recuperando nome jogadores do Array
             if (qtdeJogadores == 1) {
@@ -105,11 +116,11 @@ public class Main {
 
                 while (jogador1.getTentativas() > 0) {
 
-                    sorteado = roleta.sortear();
+                    sorteioRoleta = roleta.sortear();
                     System.out.println("");
-                    System.out.println("Foi Sorteado: " + sorteado);
+                    System.out.println("Foi Sorteado: " + sorteioRoleta);
 
-                    if (sorteado.equals("Perde Tudo")) {
+                    if (sorteioRoleta.equals("Perde Tudo")) {
                         jogador1.setTentativas(jogador1.getTentativas() - 1);
                         jogador1.setTotalPontos(0);
 
@@ -119,7 +130,7 @@ public class Main {
                             System.out.println("Que Azar Heim, PERDEU TUDO!!!!!!");
                             System.out.println("Mas não se preocupe, você ainda tem " + jogador1.getTentativas() + " tentativa(s).");
                         }
-                    } else if (sorteado.equals("Passa a Vez")) {
+                    } else if (sorteioRoleta.equals("Passa a Vez")) {
                         jogador1.setTentativas(jogador1.getTentativas() - 1);
 
                         if (jogador1.getTentativas() < 1) {
@@ -129,7 +140,7 @@ public class Main {
                             System.out.println("Mas não se preocupe, você ainda tem " + jogador1.getTentativas() + " tentativa(s).");
                         }
                     } else {
-                        jogador1.setTotalPontos(jogador1.getTotalPontos() + Integer.parseInt(sorteado));
+                        jogador1.setTotalPontos(jogador1.getTotalPontos() + Integer.parseInt(sorteioRoleta));
                         System.out.println("");
 
                     }
@@ -186,12 +197,7 @@ public class Main {
                 System.out.println("Total de Pontos: " + jogador3.getTotalPontos());
             }
         }
-        System.out.println("");
-        System.out.println("Quantidade de jogadores escolhida é: " + qtdeJogadores);
-        System.out.println("Quantidade de etapas escolhida é: " + qtdeEtapas);
-        System.out.println("Quantidade de palavras escolhida é: " + qtdePalavras);
-        System.out.println("O tema escolhido aleatóriamente foi: " + tema);
-        System.out.println("");
+
 
 //        while (totalTentativas > 0) {
 //

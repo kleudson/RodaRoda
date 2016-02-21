@@ -90,6 +90,21 @@ public class Parametros {
         }
         return tema;
     }
+    
+    public String sortearPalavra(List<String> arrayPalavras){
+        String palavraSorteada = "";       
+        double numeroAleatorio;
+        int numeroSorteado;
+
+        numeroAleatorio = Math.random() * arrayPalavras.size();
+        numeroAleatorio = Math.floor(numeroAleatorio);
+        numeroSorteado = (int) numeroAleatorio;
+        
+        palavraSorteada = arrayPalavras.set(numeroSorteado, "");
+        
+        
+        return palavraSorteada;
+    }
 
     public List<String> escolheArquivoTxt(String tema) {
         List<String> palavras = new ArrayList<String>();
