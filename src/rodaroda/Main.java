@@ -5,6 +5,7 @@
  */
 package rodaroda;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -67,11 +68,12 @@ public class Main {
 
     public static void main(String[] args) {
         String sorteado;
-        String nomeUm = "";
-        String nomeDois = "";
-        String nomeTres = "";
-        String tema = "";
-        String nomeJogadores[];
+        String nomeUm;
+        String nomeDois;
+        String nomeTres;
+        String tema;
+        String[] vetorNomeJogadores;
+        List<String> listPalavras;
         int qtdeJogadores, qtdeEtapas, qtdePalavras;
         int totalTentativas = 3;
         int totalPontos = 0;
@@ -85,12 +87,14 @@ public class Main {
         qtdeEtapas = parametros.qtdEtapas();
         qtdePalavras = parametros.qtdePalavras();
         tema = parametros.tema();
+        
+        listPalavras = parametros.escolheArquivoTxt(tema);
 
-        nomeJogadores = parametros.Jogadores(qtdeJogadores);
+        vetorNomeJogadores = parametros.Jogadores(qtdeJogadores);
 
-        for (int i = 0; i < nomeJogadores.length; i++) { //Recuperando nome jogadores do Array
+        for (int i = 0; i < vetorNomeJogadores.length; i++) { //Recuperando nome jogadores do Array
             if (qtdeJogadores == 1) {
-                nomeUm = nomeJogadores[i];
+                nomeUm = vetorNomeJogadores[i];
                 Jogadores jogador1 = new Jogadores(nomeUm, totalPontos, totalTentativas);
 
                 System.out.println("");
@@ -106,49 +110,37 @@ public class Main {
                     System.out.println("Foi Sorteado: " + sorteado);
 
                     if (sorteado.equals("Perde Tudo")) {
-                        jogador1.setTentativas(jogador1.getTentativas() -1);
+                        jogador1.setTentativas(jogador1.getTentativas() - 1);
                         jogador1.setTotalPontos(0);
-                        
-                        if (jogador1.getTentativas() < 1){
-                            System.out.println("Que Azar Heim, PERDEU TUDO!!!!!!");                                                        
+
+                        if (jogador1.getTentativas() < 1) {
+                            System.out.println("Que Azar Heim, PERDEU TUDO!!!!!!");
                         } else {
-                        System.out.println("Que Azar Heim, PERDEU TUDO!!!!!!");
-                        System.out.println("Mas não se preocupe, você ainda tem " + jogador1.getTentativas() + " tentativa(s).");
+                            System.out.println("Que Azar Heim, PERDEU TUDO!!!!!!");
+                            System.out.println("Mas não se preocupe, você ainda tem " + jogador1.getTentativas() + " tentativa(s).");
                         }
                     } else if (sorteado.equals("Passa a Vez")) {
-                        jogador1.setTentativas(jogador1.getTentativas() -1);
-                        
-                        if (jogador1.getTentativas() < 1){
-                            System.out.println("Que Azar Heim, PASSOU A VEZ!!!");                                                        
+                        jogador1.setTentativas(jogador1.getTentativas() - 1);
+
+                        if (jogador1.getTentativas() < 1) {
+                            System.out.println("Que Azar Heim, PASSOU A VEZ!!!");
                         } else {
-                        System.out.println("Que Azar Heim, PASSOU A VEZ!!!");
-                        System.out.println("Mas não se preocupe, você ainda tem " + jogador1.getTentativas() + " tentativa(s).");
+                            System.out.println("Que Azar Heim, PASSOU A VEZ!!!");
+                            System.out.println("Mas não se preocupe, você ainda tem " + jogador1.getTentativas() + " tentativa(s).");
                         }
                     } else {
                         jogador1.setTotalPontos(jogador1.getTotalPontos() + Integer.parseInt(sorteado));
                         System.out.println("");
-//                System.out.println("***** SORTE!!! ****");
-//                System.out.println("Para informar uma letra, digite '1' ou digite '2' para tentar adivinhar a palavra");
-//                System.out.println("Por favor, escolha uma letra");
-//                letra = sc.nextLine().charAt(0);
-//                System.out.println("");
-//                //totalPontos = totalPontos + Integer.parseInt(sorteado);
-//                for (int i = 0; i < palavra.length(); i++) {
-//                    if (palavra.charAt(i) == letra) {
-//                        System.out.print(letra);
-//                    } else {
-//                        System.out.print(" __ ");
-//                    }
-//                }
+
                     }
 
-                    System.out.println("A pontuação atual do(a) " + jogador1.getNome()+" é: " +jogador1.getTotalPontos());
+                    System.out.println("A pontuação atual do(a) " + jogador1.getNome() + " é: " + jogador1.getTotalPontos());
                 }
 
             } else if (qtdeJogadores == 2) {
-                nomeUm = nomeJogadores[i];
+                nomeUm = vetorNomeJogadores[i];
                 i++;
-                nomeDois = nomeJogadores[i];
+                nomeDois = vetorNomeJogadores[i];
 
                 Jogadores jogador1 = new Jogadores(nomeUm, totalPontos, totalTentativas);
                 Jogadores jogador2 = new Jogadores(nomeDois, totalPontos, totalTentativas);
@@ -165,11 +157,11 @@ public class Main {
                 System.out.println("Tentativas: " + jogador2.getTentativas());
                 System.out.println("Total de Pontos: " + jogador2.getTotalPontos());
             } else {
-                nomeUm = nomeJogadores[i];
+                nomeUm = vetorNomeJogadores[i];
                 i++;
-                nomeDois = nomeJogadores[i];
+                nomeDois = vetorNomeJogadores[i];
                 i++;
-                nomeTres = nomeJogadores[i];
+                nomeTres = vetorNomeJogadores[i];
 
                 Jogadores jogador1 = new Jogadores(nomeUm, totalPontos, totalTentativas);
                 Jogadores jogador2 = new Jogadores(nomeDois, totalPontos, totalTentativas);

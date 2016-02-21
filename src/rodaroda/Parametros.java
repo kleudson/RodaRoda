@@ -6,6 +6,14 @@
 package rodaroda;
 
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -16,7 +24,6 @@ public class Parametros {
     private int qtdeJogadores;
     private int qtdePalavras;
     private int qtdeEtapas;
-    private String tema;
 
     public int qtdEtapas() {
         Scanner sc;
@@ -29,7 +36,6 @@ public class Parametros {
             System.out.println("Por favor, escolha o número de etapas. Minimo 1 e Máximo 7.");
             qtdeEtapas = sc.nextInt();
         }
-
         return qtdeEtapas;
     }
 
@@ -62,25 +68,25 @@ public class Parametros {
 
         return qtdeJogadores;
     }
-    
+
     public String tema() {
-        double numero_aleatorio;
+        double numeroAleatorio;
         int numeroSorteado;
         String tema = "";
-        
-        numero_aleatorio = Math.random() * 3;
-        numero_aleatorio = Math.floor(numero_aleatorio);
-        numeroSorteado = (int) numero_aleatorio;
-        
+
+        numeroAleatorio = Math.random() * 3;
+        numeroAleatorio = Math.floor(numeroAleatorio);
+        numeroSorteado = (int) numeroAleatorio;
+
         switch (numeroSorteado) {//Provisório, posteriormente vai pegar de um arquivo de texto em disco.
             case 0:
-                tema = "Animais";
+                tema = "profissao";
                 break;
             case 1:
-                tema = "Carros";
+                tema = "cidade";
                 break;
-            case 2: 
-                tema = "Profissões";
+            case 2:
+                tema = "filme";
                 break;
             default:
                 System.out.println("Erro no sistema, opção de tema fora de escopo");
@@ -88,6 +94,30 @@ public class Parametros {
         return tema;
     }
 
+    public List<String> escolheArquivoTxt(String tema) {
+        List<String> palavras = new ArrayList<String>();
+        String linha = null;
+        String nomeArquivo = null;
+        String nomeArquivoCompleto = null;
+        FileReader arquivo = null;
+        BufferedReader lerArquivo = null;
+        nomeArquivo = tema;
+        nomeArquivoCompleto = "Documentos/ArquivoTexto/" + nomeArquivo + ".txt";
+
+        try {
+            arquivo = new FileReader(nomeArquivoCompleto);
+            lerArquivo = new BufferedReader(arquivo);
+            linha = lerArquivo.readLine();
+            while (linha != null) {
+                palavras.add(linha);
+                linha = lerArquivo.readLine();
+            }
+            lerArquivo.close();
+        } catch (IOException e) {
+            System.err.printf("Erro na Abertura do Arquivo: " + nomeArquivo, e.getMessage());
+        }
+        return palavras;
+    }
 
     public String[] Jogadores(int quantidade) {
         Scanner sc = new Scanner(System.in);
@@ -126,13 +156,6 @@ public class Parametros {
                 i++;
             }
         }
-//        for (int i = 0; i < nomeJogadores.length; i++){
-//            System.out.println("");
-//            System.out.println("Jogador "+(i + 1)+" : "+nomeJogadores[i]);
-//            System.out.println("");
-//        }
-        
-        
         return nomeJogadores;
     }
 }
