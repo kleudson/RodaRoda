@@ -12,15 +12,18 @@ public class Jogadores {
 
     private String nome;
     private int totalPontos;
+    private int tentativas;
 
     /**
      *
      * @param nome
      * @param totalPontos
+     * @param tentativas
      */
-    public Jogadores(String nome, int totalPontos) {
+    public Jogadores(String nome, int totalPontos, int tentativas) {
         this.nome = nome;
         this.totalPontos = totalPontos;
+        this.tentativas = tentativas;
     }
 
     public String getNome() {
@@ -38,5 +41,13 @@ public class Jogadores {
     public void setTotalPontos(int totalPontos) {
         this.totalPontos = totalPontos;
     } 
+    
+    public int getTentativas() {
+        return tentativas;
+    }
+    
+    public void setNome(int tentativas) {
+        this.tentativas = tentativas;
+    }
 
 }

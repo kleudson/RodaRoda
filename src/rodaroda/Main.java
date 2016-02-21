@@ -74,6 +74,8 @@ public class Main {
         String nomeTres = "";
         String nomeJogadores[];
         int qtdeJogadores, qtdeEtapas, qtdePalavras;
+        int totalTentativas = 3; 
+        int totalPontos = 0;
         Scanner sc = new Scanner(System.in);
         Roleta umaRoleta = new Roleta();
         Parametros parametros = new Parametros();
@@ -89,8 +91,11 @@ public class Main {
         for (int i = 0; i < nomeJogadores.length; i++){ //Recuperando nome jogadores do Array
             if (qtdeJogadores == 1) {
                 nomeUm = nomeJogadores[i];
+                Jogadores jogador1 = new Jogadores(nomeUm, totalPontos, totalTentativas);
             } else if (qtdeJogadores == 2) {
                 nomeUm = nomeJogadores[i];
+                Jogadores jogador1 = new Jogadores(nomeUm, totalPontos, totalTentativas);
+                Jogadores jogado2 = new Jogadores(nomeDois, totalPontos, totalTentativas);
                 i++;
                 nomeDois = nomeJogadores[i];
             } else {
@@ -99,24 +104,22 @@ public class Main {
                 nomeDois = nomeJogadores[i];
                 i++;
                 nomeTres = nomeJogadores[i];
+                Jogadores jogador1 = new Jogadores(nomeUm, totalPontos, totalTentativas);
+                Jogadores jogado2 = new Jogadores(nomeDois, totalPontos, totalTentativas);
+                Jogadores jogador3 = new Jogadores(nomeTres, totalPontos, totalTentativas);
             }
         }
         
-        Jogadores jogador1 = new Jogadores(nomeUm, 0);
-        Jogadores jogado2 = new Jogadores(nomeDois, 0);
-        Jogadores jogador3 = new Jogadores(nomeTres, 0);
-
-
-        System.out.println("Quantidade de jogadores escolhida é: " + qtdeJogadores);
+         System.out.println("Quantidade de jogadores escolhida é: " + qtdeJogadores);
+         System.out.println("Quantidade de etapas escolhida é: " + qtdeEtapas);
+         System.out.println("Quantidade de palavras escolhida é: " + qtdePalavras);
+         System.out.println("O tema escolhida é: " + qtdeJogadores);
 //        String tema = "animais";
 //        String palavra = "cachorro";
 
 //        System.out.println("O tema Sorteado foi: " + tema);
 
-        int contador = 3;
-        int totalPontos = 0;
-
-        while (contador > 0) {
+        while (totalTentativas > 0) {
 
 //            char letra = ' ';
 
@@ -132,14 +135,14 @@ public class Main {
              }
             
             if (sorteado == "Perde Tudo") {
-                contador--;
+                totalTentativas--;
                 totalPontos = 0;
                 System.out.println("Que Azar Heim, PERDEU TUDO!!!!!!");
-                System.out.println("Mas não se preocupe, você ainda tem " + contador + " tentativas.");
+                System.out.println("Mas não se preocupe, você ainda tem " + totalTentativas + " tentativas.");
             } else if (sorteado == "Passa a Vez") {
-                contador--;
+                totalTentativas--;
                 System.out.println("Que Azar Heim, PASSOU A VEZ!!!");
-                System.out.println("Mas não se preocupe, você ainda tem " + contador + " tentativas.");
+                System.out.println("Mas não se preocupe, você ainda tem " + totalTentativas + " tentativas.");
               } else {
 //                System.out.println("***** SORTE!!! ****");
 //                System.out.println("Para informar uma letra, digite '1' ou digite '2' para tentar adivinhar a palavra");

@@ -16,6 +16,7 @@ public class Parametros {
     private int qtdeJogadores;
     private int qtdePalavras;
     private int qtdeEtapas;
+    private String tema;
 
     public int qtdEtapas() {
         Scanner sc;
@@ -50,6 +51,44 @@ public class Parametros {
     public int qtdeJogadores() {
         Scanner sc;
         sc = new Scanner(System.in);
+
+        System.out.println("Informe a Quantidade de jogadores");
+        qtdeJogadores = sc.nextInt();
+
+        while ((qtdeJogadores < 1) || (qtdeJogadores > 3)) {
+            System.out.println("Por favor, escolha o número de jogadores. Minimo 1 e Máximo 3.");
+            qtdeJogadores = sc.nextInt();
+        }
+
+        return qtdeJogadores;
+    }
+    
+    public String tema() {
+        double numero_aleatorio;
+        int numeroSorteado;
+        String tema = "";
+        Scanner sc;
+        sc = new Scanner(System.in);
+        
+        numero_aleatorio = Math.random() * 3;
+        numero_aleatorio = Math.floor(numero_aleatorio);
+        numeroSorteado = (int) numero_aleatorio;
+        
+        switch (numeroSorteado) {//Provisório, posteriormente vai pegar de um arquivo de texto em disco.
+            case 1:
+                tema = "Animais";
+                return tema;
+                break;
+            case 2:
+                tema = "Carros";
+                return tema;
+                break;
+            case 3: 
+                tema = "Profissões";
+                return tema;
+                break;
+        }   
+        
 
         System.out.println("Informe a Quantidade de jogadores");
         qtdeJogadores = sc.nextInt();
