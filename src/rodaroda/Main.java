@@ -69,43 +69,22 @@ public class Main {
     
     public static void main(String[] args) {
         String sorteado;
-        String jogadorUm, jogadorDois, jogadorTres;
-        int numeroJogadores;
+        String nomeJogadores[];
+        int qtdeJogadores, qtdeEtapas, qtdePalavras;
         Scanner sc = new Scanner(System.in);
         Roleta umaRoleta = new Roleta();
         Parametros parametros = new Parametros();
+        
+        umaRoleta.letrasPalavra();
 
-        numeroJogadores = parametros.qtdeJogadores();
+        qtdeJogadores = parametros.qtdeJogadores();
+        qtdeEtapas = parametros.qtdEtapas();
+        qtdePalavras = parametros.qtdePalavras();
+        
+        nomeJogadores = parametros.Jogadores(qtdeJogadores);
 
-        for (int i = 0; i < numeroJogadores; i++) {
-            if (numeroJogadores == 1) {
-                System.out.println("Informe o nome do jogador " + (i + 1) + ":");
-                jogadorUm = sc.nextLine();
-            } else if (numeroJogadores == 2) {
-                System.out.println("Informe o nome do jogador " + (i + 1) + ":");
-                jogadorUm = sc.nextLine();
-                i++;
 
-                System.out.println("Informe o nome do jogador " + (i + 1) + ":");
-                jogadorDois = sc.nextLine();
-                i++;
-
-            } else if (numeroJogadores == 3) {
-                System.out.println("Informe o nome do jogador " + (i + 1) + ":");
-                jogadorUm = sc.nextLine();
-                i++;
-
-                System.out.println("Informe o nome do jogador " + (i + 1) + ":");
-                jogadorDois = sc.nextLine();
-                i++;
-
-                System.out.println("Informe o nome do jogador " + (i + 1) + ":");
-                jogadorTres = sc.nextLine();
-                i++;
-            }
-        }
-
-        System.out.println("Quantidade de jogadores escolhida é: " + numeroJogadores);
+        System.out.println("Quantidade de jogadores escolhida é: " + qtdeJogadores);
 //        String tema = "animais";
 //        String palavra = "cachorro";
 

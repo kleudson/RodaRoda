@@ -5,6 +5,10 @@
  */
 package rodaroda;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+import jdk.nashorn.internal.objects.NativeArray;
+
 /**
 
  * @author Kleudson e Wallace
@@ -12,6 +16,20 @@ package rodaroda;
  */
 
 public class Roleta {
+
+    public String letrasPalavra() {
+        String palavraString;
+        int tamanhoPalavra;
+        Scanner sc = new Scanner(System.in);
+
+        do {
+            System.out.println("Digite somente uma letra");
+            palavraString = sc.nextLine();
+            tamanhoPalavra = palavraString.length();
+        } while (tamanhoPalavra != 1);
+
+        return palavraString;
+    }
 
     public String sortear() {
 
