@@ -7,7 +7,7 @@ package rodaroda;
 
 /**
 
- * @author Kleudson
+ * @author Kleudson e Wallace
  
  */
 
