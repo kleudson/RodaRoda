@@ -101,6 +101,13 @@ public class Parametros {
                 i++;
             }
         }
+        for (int i = 0; i < nomeJogadores.length; i++){
+            System.out.println("");
+            System.out.println("Jogador "+(i + 1)+" : "+nomeJogadores[i]);
+            System.out.println("");
+        }
+        
+        
         return nomeJogadores;
     }
 }

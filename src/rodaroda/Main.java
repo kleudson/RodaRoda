@@ -69,6 +69,9 @@ public class Main {
     
     public static void main(String[] args) {
         String sorteado;
+        String nomeUm = "";
+        String nomeDois = "";
+        String nomeTres = "";
         String nomeJogadores[];
         int qtdeJogadores, qtdeEtapas, qtdePalavras;
         Scanner sc = new Scanner(System.in);
@@ -82,6 +85,26 @@ public class Main {
         qtdePalavras = parametros.qtdePalavras();
         
         nomeJogadores = parametros.Jogadores(qtdeJogadores);
+        
+        for (int i = 0; i < nomeJogadores.length; i++){ //Recuperando nome jogadores do Array
+            if (qtdeJogadores == 1) {
+                nomeUm = nomeJogadores[i];
+            } else if (qtdeJogadores == 2) {
+                nomeUm = nomeJogadores[i];
+                i++;
+                nomeDois = nomeJogadores[i];
+            } else {
+                nomeUm = nomeJogadores[i];
+                i++;
+                nomeDois = nomeJogadores[i];
+                i++;
+                nomeTres = nomeJogadores[i];
+            }
+        }
+        
+        Jogadores jogador1 = new Jogadores(nomeUm, 0);
+        Jogadores jogado2 = new Jogadores(nomeDois, 0);
+        Jogadores jogador3 = new Jogadores(nomeTres, 0);
 
 
         System.out.println("Quantidade de jogadores escolhida é: " + qtdeJogadores);
