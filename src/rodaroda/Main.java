@@ -86,7 +86,7 @@ public class Main {
         qtdeJogadores = parametros.qtdeJogadores();
         qtdeEtapas = parametros.qtdEtapas();
         qtdePalavras = parametros.qtdePalavras();
-        tema = parametros.tema();
+        tema = parametros.sortearTema();
         
         listPalavras = parametros.escolheArquivoTxt(tema);
 

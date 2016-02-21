@@ -7,11 +7,8 @@ package rodaroda;
 
 import java.util.Scanner;
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,7 +66,7 @@ public class Parametros {
         return qtdeJogadores;
     }
 
-    public String tema() {
+    public String sortearTema() {
         double numeroAleatorio;
         int numeroSorteado;
         String tema = "";
