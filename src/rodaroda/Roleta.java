@@ -36,7 +36,7 @@ public class Roleta {
         double numero_aleatorio;
         int numeroSorteado;
 
-        numero_aleatorio = Math.random() * 20;
+        numero_aleatorio = Math.random() * 4;
         numero_aleatorio = Math.floor(numero_aleatorio);
         numeroSorteado = (int) numero_aleatorio;
 

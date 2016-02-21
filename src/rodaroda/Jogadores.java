@@ -46,7 +46,7 @@ public class Jogadores {
         return tentativas;
     }
     
-    public void setNome(int tentativas) {
+    public void setTentativas(int tentativas) {
         this.tentativas = tentativas;
     }
 
