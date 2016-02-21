@@ -102,7 +102,7 @@ public class Parametros {
         FileReader arquivo = null;
         BufferedReader lerArquivo = null;
         nomeArquivo = tema;
-        nomeArquivoCompleto = "Documentos/ArquivoTexto/" + nomeArquivo + ".txt";
+        nomeArquivoCompleto = "ArquivosTxt/" + nomeArquivo + ".txt";
 
         try {
             arquivo = new FileReader(nomeArquivoCompleto);
