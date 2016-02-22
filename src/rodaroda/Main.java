@@ -5,6 +5,7 @@
  */
 package rodaroda;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -73,16 +74,17 @@ public class Main {
         String nomeTres;
         String tema;
         String palavraSorteada;
+        String letra;
         String[] vetorNomeJogadores;
-        List<String> listPalavras;
+        List<String> listPalavras = null;
+        List<String> listLetrasJaSorteadas = null;
         int qtdeJogadores, qtdeEtapas, qtdePalavras;
         int totalTentativas = 3;
         int totalPontos = 0;
+        int intem = 0;
         Scanner sc = new Scanner(System.in);
         Roleta roleta = new Roleta();
         Parametros parametros = new Parametros();
-
-        roleta.letrasPalavra();
 
         qtdeJogadores = parametros.qtdeJogadores();
         qtdeEtapas = parametros.qtdEtapas();
@@ -139,10 +141,26 @@ public class Main {
                             System.out.println("Que Azar Heim, PASSOU A VEZ!!!");
                             System.out.println("Mas não se preocupe, você ainda tem " + jogador1.getTentativas() + " tentativa(s).");
                         }
-                    } else {
+//                    } else {
+//                                               
+//                        System.out.println("Você tem direito de escolher uma letra.");
+//                        if (listLetrasJaSorteadas.isEmpty()){                          
+//                            
+//                        } else {
+//                            for (Iterator<String> it = listLetrasJaSorteadas.iterator(); it.hasNext();) {
+//                                String letra = it.next();
+//                            }
+//{
+//                            
+//                        }                     
+//                                
+//                                }
+//                        letra = parametros.letrasPalavra();
+//                        listLetrasJaSorteadas.add(letra);
+//                        System.out.println("");
+                        
                         jogador1.setTotalPontos(jogador1.getTotalPontos() + Integer.parseInt(sorteioRoleta));
                         System.out.println("");
-
                     }
 
                     System.out.println("A pontuação atual do(a) " + jogador1.getNome() + " é: " + jogador1.getTotalPontos());

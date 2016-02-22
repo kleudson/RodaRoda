@@ -129,14 +129,33 @@ public class Parametros {
         }
         return palavras;
     }
-    
-//    public String compararLetras (String palavraSorteada, char letraInformada){
-//        if (palavraSorteada.indexOf(toString(letraInformada)){
-//            
-//        }
-//        return "";
-//    }
 
+    public String letrasPalavra() {
+        String palavraString;
+        boolean eAlpha = false;
+        int tamanhoPalavra;
+        Scanner sc = new Scanner(System.in);
+
+        do {
+            System.out.println("Digite somente uma letra");
+            palavraString = sc.nextLine().toLowerCase();
+            tamanhoPalavra = palavraString.length();
+            eAlpha = isAlpha(palavraString);
+            while (eAlpha == false) {
+                System.out.println("Digite apenas uma letra. Outros caracteres serão ignorados.");
+                palavraString = sc.nextLine().toLowerCase();
+                tamanhoPalavra = palavraString.length();
+                eAlpha = isAlpha(palavraString);
+            }
+        } while (tamanhoPalavra != 1);
+
+        return palavraString;
+    }
+
+    public boolean isAlpha(String name) {
+        return name.matches("[a-zA-Z]+");
+    }
+    
     public String[] Jogadores(int quantidade) {
         Scanner sc = new Scanner(System.in);
         int qtdeRecebida = quantidade;
