@@ -100,15 +100,15 @@ public class Main {
         System.out.println("Quantidade de etapas escolhida é: " + qtdeEtapas);
         System.out.println("Quantidade de palavras escolhida é: " + qtdePalavras);
         System.out.println("O tema escolhido aleatóriamente foi: " + tema);
-        System.out.println("A palavra sorteada foi: "+palavraSorteada);
         System.out.println("");
+        
+        
 
         for (int i = 0; i < vetorNomeJogadores.length; i++) { //Recuperando nome jogadores do Array
             if (qtdeJogadores == 1) {
                 nomeUm = vetorNomeJogadores[i];
                 Jogadores jogador1 = new Jogadores(nomeUm, totalPontos, totalTentativas);
 
-                System.out.println("");
                 System.out.println("########## JOGADOR 01 ##########");
                 System.out.println("Nome: " + jogador1.getNome());
                 System.out.println("Tentativas: " + jogador1.getTentativas());

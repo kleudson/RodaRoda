@@ -101,18 +101,17 @@ public class Parametros {
         numeroSorteado = (int) numeroAleatorio;
         
         palavraSorteada = arrayPalavras.set(numeroSorteado, "");
-        
-        
+               
         return palavraSorteada;
     }
 
     public List<String> escolheArquivoTxt(String tema) {
-        List<String> palavras = new ArrayList<String>();
-        String linha = null;
-        String nomeArquivo = null;
-        String nomeArquivoCompleto = null;
-        FileReader arquivo = null;
-        BufferedReader lerArquivo = null;
+        List<String> palavras = new ArrayList<>();
+        String linha;
+        String nomeArquivo;
+        String nomeArquivoCompleto;
+        FileReader arquivo;
+        BufferedReader lerArquivo;
         nomeArquivo = tema;
         nomeArquivoCompleto = "ArquivosTxt/" + nomeArquivo + ".txt";
 
@@ -130,6 +129,13 @@ public class Parametros {
         }
         return palavras;
     }
+    
+//    public String compararLetras (String palavraSorteada, char letraInformada){
+//        if (palavraSorteada.indexOf(toString(letraInformada)){
+//            
+//        }
+//        return "";
+//    }
 
     public String[] Jogadores(int quantidade) {
         Scanner sc = new Scanner(System.in);
