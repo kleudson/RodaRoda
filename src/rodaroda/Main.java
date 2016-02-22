@@ -141,7 +141,7 @@ public class Main {
                             System.out.println("Que Azar Heim, PASSOU A VEZ!!!");
                             System.out.println("Mas não se preocupe, você ainda tem " + jogador1.getTentativas() + " tentativa(s).");
                         }
-//                    } else {
+                    } else {
 //                                               
 //                        System.out.println("Você tem direito de escolher uma letra.");
 //                        if (listLetrasJaSorteadas.isEmpty()){                          
