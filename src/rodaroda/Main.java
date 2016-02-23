@@ -81,7 +81,7 @@ public class Main {
         int qtdeJogadores, qtdeEtapas, qtdePalavras;
         int totalTentativas = 3;
         int totalPontos = 0;
-        int intem = 0;
+        int item = 0;
         Scanner sc = new Scanner(System.in);
         Roleta roleta = new Roleta();
         Parametros parametros = new Parametros();
@@ -107,16 +107,11 @@ public class Main {
         
 
         for (int i = 0; i < vetorNomeJogadores.length; i++) { //Recuperando nome jogadores do Array
+            
             if (qtdeJogadores == 1) {
                 nomeUm = vetorNomeJogadores[i];
                 Jogadores jogador1 = new Jogadores(nomeUm, totalPontos, totalTentativas);
-
-                System.out.println("########## JOGADOR 01 ##########");
-                System.out.println("Nome: " + jogador1.getNome());
-                System.out.println("Tentativas: " + jogador1.getTentativas());
-                System.out.println("Total de Pontos: " + jogador1.getTotalPontos());
-                System.out.println("");
-                System.out.println("Dica: a palavra contém "+palavraSorteada.length()+" letras.");
+                System.out.println("Dica: a palavra contém " + palavraSorteada.length() + " letras.");
 
                 while (jogador1.getTentativas() > 0) {
 
