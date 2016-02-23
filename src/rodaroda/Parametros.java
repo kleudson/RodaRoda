@@ -62,7 +62,6 @@ public class Parametros {
             System.out.println("Por favor, escolha o número de jogadores. Minimo 1 e Máximo 3.");
             qtdeJogadores = sc.nextInt();
         }
-
         return qtdeJogadores;
     }
 
@@ -90,20 +89,6 @@ public class Parametros {
         }
         return tema;
     }
-    
-    public String sortearPalavra(List<String> arrayPalavras){
-        String palavraSorteada = "";       
-        double numeroAleatorio;
-        int numeroSorteado;
-
-        numeroAleatorio = Math.random() * arrayPalavras.size();
-        numeroAleatorio = Math.floor(numeroAleatorio);
-        numeroSorteado = (int) numeroAleatorio;
-        
-        palavraSorteada = arrayPalavras.set(numeroSorteado, "");
-               
-        return palavraSorteada;
-    }
 
     public List<String> escolheArquivoTxt(String tema) {
         List<String> palavras = new ArrayList<>();
@@ -129,70 +114,20 @@ public class Parametros {
         }
         return palavras;
     }
-
-    public String letrasPalavra() {
-        String palavraString;
-        boolean eAlpha = false;
-        int tamanhoPalavra;
-        Scanner sc = new Scanner(System.in);
-
-        do {
-            System.out.println("Digite somente uma letra");
-            palavraString = sc.nextLine().toLowerCase();
-            tamanhoPalavra = palavraString.length();
-            eAlpha = isAlpha(palavraString);
-            while (eAlpha == false) {
-                System.out.println("Digite apenas uma letra. Outros caracteres serão ignorados.");
-                palavraString = sc.nextLine().toLowerCase();
-                tamanhoPalavra = palavraString.length();
-                eAlpha = isAlpha(palavraString);
-            }
-        } while (tamanhoPalavra != 1);
-
-        return palavraString;
-    }
-
-    public boolean isAlpha(String name) {
-        return name.matches("[a-zA-Z]+");
-    }
     
-    public String[] Jogadores(int quantidade) {
+    public String[] nomeDosJogadores(int quantidade) {
         Scanner sc = new Scanner(System.in);
         int qtdeRecebida = quantidade;
         String nomeJogadores[] = new String[qtdeRecebida];
-        String jogadorUm, jogadorDois, jogadorTres;
-
-        for (int i = 0; i < qtdeRecebida; i++) {
-            if (qtdeRecebida == 1) {
-                System.out.println("Informe o nome do jogador " + (i + 1) + ":");
-                jogadorUm = sc.nextLine();
-                nomeJogadores[i] = jogadorUm;
-            } else if (qtdeRecebida == 2) {
-                System.out.println("Informe o nome do jogador " + (i + 1) + ":");
-                jogadorUm = sc.nextLine();
-                nomeJogadores[i] = jogadorUm;
-                i++;
-
-                System.out.println("Informe o nome do jogador " + (i + 1) + ":");
-                jogadorDois = sc.nextLine();
-                nomeJogadores[i] = jogadorDois;
-            } else if (qtdeRecebida == 3) {
-                System.out.println("Informe o nome do jogador " + (i + 1) + ":");
-                jogadorUm = sc.nextLine();
-                nomeJogadores[i] = jogadorUm;
-                i++;
-
-                System.out.println("Informe o nome do jogador " + (i + 1) + ":");
-                jogadorDois = sc.nextLine();
-                nomeJogadores[i] = jogadorDois;
-                i++;
-
-                System.out.println("Informe o nome do jogador " + (i + 1) + ":");
-                jogadorTres = sc.nextLine();
-                nomeJogadores[i] = jogadorTres;
-                i++;
+        int contador = 0;
+        String jogador = "";
+        
+            while (contador < qtdeRecebida) {
+                System.out.println("Informe o nome do jogador " + (contador + 1) + ":");
+                jogador = sc.nextLine();
+                nomeJogadores[contador] = jogador;
+                contador++;
             }
-        }
         return nomeJogadores;
     }
 }

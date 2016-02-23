@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package rodaroda;
+
+import java.util.List;
+
 /**
  *
  * @author Kleudson
@@ -11,7 +14,7 @@ package rodaroda;
 public class Jogadores {
 
     private String nome;
-    private int pontos;
+    private int totalPontos;
     private int tentativas;
 
     /**
@@ -20,9 +23,9 @@ public class Jogadores {
      * @param totalPontos
      * @param tentativas
      */
-    public Jogadores(String nome, int totalPontos, int tentativas) {
+    public void jogadores(String nome, int totalPontos, int tentativas) {
         this.nome = nome;
-        this.pontos = totalPontos;
+        this.totalPontos = totalPontos;
         this.tentativas = tentativas;
     }
 
@@ -35,11 +38,11 @@ public class Jogadores {
     }
 
     public int getTotalPontos() {
-        return pontos;
+        return totalPontos;
     }
     
     public void setTotalPontos(int totalPontos) {
-        this.pontos = totalPontos;
+        this.totalPontos = totalPontos;
     } 
     
     public int getTentativas() {
@@ -49,82 +52,15 @@ public class Jogadores {
     public void setTentativas(int tentativas) {
         this.tentativas = tentativas;
     }
-    
-    public void imprimirUmJogador(String jogadores[]) {
-        int totalPontos = 0;
-        int totalTentativas = 3;
-        String nomeUm = "";
-        
-            nomeUm = jogadores[0];
-            Jogadores jogador1 = new Jogadores(nomeUm, totalPontos, totalTentativas);
 
-            System.out.println("########## JOGADOR 01 ##########");
-            System.out.println("Nome: " + jogador1.getNome());
-            System.out.println("Tentativas: " + jogador1.getTentativas());
-            System.out.println("Total de Pontos: " + jogador1.getTotalPontos());
-            System.out.println("");
-    }
-
-
-  public void imprimirDoisJogadores(String jogadores[]) {
-      String nomeUm, nomeDois;  
-      int totalPontos = 0;
-        int totalTentativas = 3;
-        
-                nomeUm = jogadores[0];
-                i++;
-                nomeDois = jogadores[1];
-
-                Jogadores jogador1 = new Jogadores(nomeUm, totalPontos, totalTentativas);
-                Jogadores jogador2 = new Jogadores(nomeDois, totalPontos, totalTentativas);
-
+  public void imprimirDadosJogadores(List<Jogadores> jogadores) {
+      for (int i = 0; i < jogadores.size(); i++){
                 System.out.println("");
-                System.out.println("########## JOGADOR 01 ##########");
-                System.out.println("Nome: " + jogador1.getNome());
-                System.out.println("Tentativas: " + jogador1.getTentativas());
-                System.out.println("Total de Pontos: " + jogador1.getTotalPontos());
-
-                System.out.println("");
-                System.out.println("########## JOGADOR 02 ##########");
-                System.out.println("Nome: " + jogador2.getNome());
-                System.out.println("Tentativas: " + jogador2.getTentativas());
-                System.out.println("Total de Pontos: " + jogador2.getTotalPontos());
-  }
-  
-  public void imprimirTresJogadores (String jogadores[]) {
-      
-      String nomeUm, nomeDois;  
-      int totalPontos = 0;
-        int totalTentativas = 3;
-        
-        
-                nomeUm = jogadores[0];
-
-                nomeDois = jogadores[1];
-
-                nomeTres = jogadores[2];
-
-                Jogadores jogador1 = new Jogadores(nomeUm, totalPontos, totalTentativas);
-                Jogadores jogador2 = new Jogadores(nomeDois, totalPontos, totalTentativas);
-                Jogadores jogador3 = new Jogadores(nomeTres, totalPontos, totalTentativas);
-
-                System.out.println("");
-                System.out.println("########## JOGADOR 01 ##########");
-                System.out.println("Nome: " + jogador1.getNome());
-                System.out.println("Tentativas: " + jogador1.getTentativas());
-                System.out.println("Total de Pontos: " + jogador1.getTotalPontos());
-
-                System.out.println("");
-                System.out.println("########## JOGADOR 02 ##########");
-                System.out.println("Nome: " + jogador2.getNome());
-                System.out.println("Tentativas: " + jogador2.getTentativas());
-                System.out.println("Total de Pontos: " + jogador2.getTotalPontos());
-
-                System.out.println("");
-                System.out.println("########## JOGADOR 03 ##########");
-                System.out.println("Nome: " + jogador3.getNome());
-                System.out.println("Tentativas: " + jogador3.getTentativas());
-                System.out.println("Total de Pontos: " + jogador3.getTotalPontos());
+                System.out.println("########## JOGADOR 0"+(i+1)+" ##########");
+                System.out.println("Nome: " + jogadores.get(i).getNome());
+                System.out.println("Tentativas: " + jogadores.get(i).getTentativas());
+                System.out.println("Total de Pontos: " + jogadores.get(i).getTotalPontos());
+      }
   }
 }
 

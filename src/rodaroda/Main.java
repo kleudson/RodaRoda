@@ -6,7 +6,6 @@
 package rodaroda;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -49,25 +48,6 @@ public class Main {
         }
     }
 
-    public void Escolha() {
-//        int opcao;
-//        do { Menu();
-//        Scanner sc = new Scanner(System.in);
-//	   opcao = sc.nextInt();
-//	   switch (opcao) {
-//		  case 1:Sorte();
-//	             break;
-//		  case 2:Sorte();
-//		         break;
-//		  case 3:Sorte();
-//		         break;
-//		  default : System.out.println("Opção não existente\n");
-//		         break;
-//		   }
-//
-//  }while(opcao!=3);
-    }
-
     public static void main(String[] args) {
         String sorteioRoleta;
         String nomeUm;
@@ -77,14 +57,18 @@ public class Main {
         String palavraSorteada;
         char letra;
         String[] vetorNomeJogadores;
+        Jogadores[] vetorJogadores;
         List<String> listPalavras;
+        List<Jogadores> listJogadores = new ArrayList<>();
         int qtdeJogadores, qtdeEtapas, qtdePalavras;
         int totalTentativas = 3;
         int totalPontos = 0;
-        int item = 0;
-        Scanner sc = new Scanner(System.in);
         Roleta roleta = new Roleta();
+        Palavras palavra = new Palavras();
         Parametros parametros = new Parametros();
+        Jogadores jogador1 = new Jogadores();
+        Jogadores jogador2 = new Jogadores();
+        Jogadores jogador3 = new Jogadores();
 
         qtdeJogadores = parametros.qtdeJogadores();
         qtdeEtapas = parametros.qtdEtapas();
@@ -93,24 +77,26 @@ public class Main {
         
         listPalavras = parametros.escolheArquivoTxt(tema);
         
-        palavraSorteada = parametros.sortearPalavra(listPalavras);        
+        palavraSorteada = palavra.sortearPalavra(listPalavras);        
 
-        vetorNomeJogadores = parametros.Jogadores(qtdeJogadores);
+        vetorNomeJogadores = parametros.nomeDosJogadores(qtdeJogadores);
         
         System.out.println("");
         System.out.println("Quantidade de jogadores escolhida é: " + qtdeJogadores);
         System.out.println("Quantidade de etapas escolhida é: " + qtdeEtapas);
         System.out.println("Quantidade de palavras escolhida é: " + qtdePalavras);
         System.out.println("O tema escolhido aleatóriamente foi: " + tema);
-        System.out.println("");
-        
-        
+        System.out.println(""); 
 
         for (int i = 0; i < vetorNomeJogadores.length; i++) { //Recuperando nome jogadores do Array
             
             if (qtdeJogadores == 1) {
                 nomeUm = vetorNomeJogadores[i];
-                Jogadores jogador1 = new Jogadores(nomeUm, totalPontos, totalTentativas);
+                jogador1.jogadores(nomeUm, totalPontos, totalTentativas);
+                listJogadores.add(jogador1);
+                
+                jogador1.imprimirDadosJogadores(listJogadores);
+                
                 System.out.println("Dica: a palavra contém " + palavraSorteada.length() + " letras.");
 
                 while (jogador1.getTentativas() > 0) {
@@ -140,8 +126,8 @@ public class Main {
                         }
                     } else {
                         
-                        letra = parametros.letrasPalavra().charAt(0);
-                        roleta.compararLetras(letra, palavraSorteada);
+                        letra = palavra.letrasPalavra().charAt(0);
+                        palavra.compararLetras(letra, palavraSorteada);
                         jogador1.setTotalPontos(jogador1.getTotalPontos() + Integer.parseInt(sorteioRoleta));
                         System.out.println("");
                     }
@@ -150,24 +136,18 @@ public class Main {
                 }
 
             } else if (qtdeJogadores == 2) {
+                
                 nomeUm = vetorNomeJogadores[i];
                 i++;
                 nomeDois = vetorNomeJogadores[i];
 
-                Jogadores jogador1 = new Jogadores(nomeUm, totalPontos, totalTentativas);
-                Jogadores jogador2 = new Jogadores(nomeDois, totalPontos, totalTentativas);
-
-                System.out.println("");
-                System.out.println("########## JOGADOR 01 ##########");
-                System.out.println("Nome: " + jogador1.getNome());
-                System.out.println("Tentativas: " + jogador1.getTentativas());
-                System.out.println("Total de Pontos: " + jogador1.getTotalPontos());
-
-                System.out.println("");
-                System.out.println("########## JOGADOR 02 ##########");
-                System.out.println("Nome: " + jogador2.getNome());
-                System.out.println("Tentativas: " + jogador2.getTentativas());
-                System.out.println("Total de Pontos: " + jogador2.getTotalPontos());
+                jogador1.jogadores(nomeUm, totalPontos, totalTentativas);
+                jogador2.jogadores(nomeDois, totalPontos, totalTentativas);
+                
+                listJogadores.add(jogador1);
+                listJogadores.add(jogador2);
+                
+                jogador1.imprimirDadosJogadores(listJogadores);
             } else {
                 nomeUm = vetorNomeJogadores[i];
                 i++;
@@ -175,72 +155,18 @@ public class Main {
                 i++;
                 nomeTres = vetorNomeJogadores[i];
 
-                Jogadores jogador1 = new Jogadores(nomeUm, totalPontos, totalTentativas);
-                Jogadores jogador2 = new Jogadores(nomeDois, totalPontos, totalTentativas);
-                Jogadores jogador3 = new Jogadores(nomeTres, totalPontos, totalTentativas);
-
-                System.out.println("");
-                System.out.println("########## JOGADOR 01 ##########");
-                System.out.println("Nome: " + jogador1.getNome());
-                System.out.println("Tentativas: " + jogador1.getTentativas());
-                System.out.println("Total de Pontos: " + jogador1.getTotalPontos());
-
-                System.out.println("");
-                System.out.println("########## JOGADOR 02 ##########");
-                System.out.println("Nome: " + jogador2.getNome());
-                System.out.println("Tentativas: " + jogador2.getTentativas());
-                System.out.println("Total de Pontos: " + jogador2.getTotalPontos());
-
-                System.out.println("");
-                System.out.println("########## JOGADOR 03 ##########");
-                System.out.println("Nome: " + jogador3.getNome());
-                System.out.println("Tentativas: " + jogador3.getTentativas());
-                System.out.println("Total de Pontos: " + jogador3.getTotalPontos());
+                jogador1.jogadores(nomeUm, totalPontos, totalTentativas);
+                jogador2.jogadores(nomeDois, totalPontos, totalTentativas);
+                jogador3.jogadores(nomeTres, totalPontos, totalTentativas);
+                
+                listJogadores.add(jogador1);
+                listJogadores.add(jogador2);
+                listJogadores.add(jogador3);
+                
+                jogador1.imprimirDadosJogadores(listJogadores);
             }
         }
 
-
-//        while (totalTentativas > 0) {
-//
-//            sorteado = roleta.sortear();
-//            System.out.println("Foi Sorteado: " + sorteado);
-//
-//            if (("Perde Tudo".equals(sorteado)) || ("Passa a Vez".equals(sorteado))) {
-//
-//            } else {
-//                totalPontos = totalPontos + Integer.parseInt(sorteado);
-//                System.out.println("Total é: " + totalPontos);
-//                System.out.println("");
-//            }
-//
-//            if (sorteado == "Perde Tudo") {
-//                totalTentativas--;
-//                totalPontos = 0;
-//                System.out.println("Que Azar Heim, PERDEU TUDO!!!!!!");
-//                System.out.println("Mas não se preocupe, você ainda tem " + totalTentativas + " tentativas.");
-//            } else if (sorteado == "Passa a Vez") {
-//                totalTentativas--;
-//                System.out.println("Que Azar Heim, PASSOU A VEZ!!!");
-//                System.out.println("Mas não se preocupe, você ainda tem " + totalTentativas + " tentativas.");
-//            } else {
-////                System.out.println("***** SORTE!!! ****");
-////                System.out.println("Para informar uma letra, digite '1' ou digite '2' para tentar adivinhar a palavra");
-////                System.out.println("Por favor, escolha uma letra");
-////                letra = sc.nextLine().charAt(0);
-////                System.out.println("");
-////                //totalPontos = totalPontos + Integer.parseInt(sorteado);
-////                for (int i = 0; i < palavra.length(); i++) {
-////                    if (palavra.charAt(i) == letra) {
-////                        System.out.print(letra);
-////                    } else {
-////                        System.out.print(" __ ");
-////                    }
-////                }
-//            }
-//
-//            System.out.println("");
-//            System.out.println("Sua pontuação atual é: " + totalPontos);
-//        }
         System.out.println("");
         System.out.println("FIM DE JOGO ");
         System.out.println("");

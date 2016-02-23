@@ -15,44 +15,6 @@ import java.util.Scanner;
 
 
 public class Roleta {   
-    
-    
-    public void compararLetras(char letraInformada, String palavraSorteada) {
-        int tamanhoPalavra = palavraSorteada.length();
-        int letraErrada = 0;
-        String  palavraFormada = "";
-        char letrasCertas[] = new char [tamanhoPalavra];
-        char[] letrasPalavraSorteada = new char[tamanhoPalavra];
-        
-        for (int i = 0; i < tamanhoPalavra; i++) {
-            letrasPalavraSorteada[i] = palavraSorteada.charAt(i);
-        }
-        
-            for (int x = 0; x < tamanhoPalavra; x++){
-                if (letraInformada == letrasPalavraSorteada[x]){
-                    letrasCertas[x] = letraInformada;
-                } else {
-                    letraErrada++;
-                }
-                
-                if (letrasCertas[x] == letrasPalavraSorteada[x]){
-                    palavraFormada = palavraFormada + letrasCertas[x];
-                    System.out.print("  "+letrasCertas[x]+"  ");
-                } else {
-                    System.out.print(" __ ");
-                }
-            }
-            
-            if (letraErrada >= tamanhoPalavra){
-                System.out.println("Não existe essa letra na palavra!");
-            }
-            
-            if (palavraFormada.equals(palavraSorteada)){
-                System.out.println("**************************************************************");
-                System.out.println("************* PARABÉNS, VOCÊ ACERTOU A PALAVRA!! *************");
-                System.out.println("**************************************************************");
-            }
-    }
 
     public String sortear() {
 
