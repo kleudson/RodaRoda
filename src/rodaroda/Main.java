@@ -5,6 +5,7 @@
  */
 package rodaroda;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -74,10 +75,9 @@ public class Main {
         String nomeTres;
         String tema;
         String palavraSorteada;
-        String letra;
+        char letra;
         String[] vetorNomeJogadores;
-        List<String> listPalavras = null;
-        List<String> listLetrasJaSorteadas = null;
+        List<String> listPalavras;
         int qtdeJogadores, qtdeEtapas, qtdePalavras;
         int totalTentativas = 3;
         int totalPontos = 0;
@@ -115,6 +115,8 @@ public class Main {
                 System.out.println("Nome: " + jogador1.getNome());
                 System.out.println("Tentativas: " + jogador1.getTentativas());
                 System.out.println("Total de Pontos: " + jogador1.getTotalPontos());
+                System.out.println("");
+                System.out.println("Dica: a palavra contém "+palavraSorteada.length()+" letras.");
 
                 while (jogador1.getTentativas() > 0) {
 
@@ -142,23 +144,9 @@ public class Main {
                             System.out.println("Mas não se preocupe, você ainda tem " + jogador1.getTentativas() + " tentativa(s).");
                         }
                     } else {
-//                                               
-//                        System.out.println("Você tem direito de escolher uma letra.");
-//                        if (listLetrasJaSorteadas.isEmpty()){                          
-//                            
-//                        } else {
-//                            for (Iterator<String> it = listLetrasJaSorteadas.iterator(); it.hasNext();) {
-//                                String letra = it.next();
-//                            }
-//{
-//                            
-//                        }                     
-//                                
-//                                }
-//                        letra = parametros.letrasPalavra();
-//                        listLetrasJaSorteadas.add(letra);
-//                        System.out.println("");
                         
+                        letra = parametros.letrasPalavra().charAt(0);
+                        roleta.compararLetras(letra, palavraSorteada);
                         jogador1.setTotalPontos(jogador1.getTotalPontos() + Integer.parseInt(sorteioRoleta));
                         System.out.println("");
                     }
