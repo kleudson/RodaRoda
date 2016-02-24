@@ -16,38 +16,57 @@ public class RodaRoda {
     Parametros parametro = new Parametros();
 
     public void iniciarJogo(int qtdeJogadores, Jogadores jogador, String palavraSorteada) {
-        String sorteioRoleta = "";
+        String valorSorteadoRoleta = "";
+        String palavraCompleta = "";
         int tamanhoPalavra = palavraSorteada.length();
         char letrasCertas[] = new char[tamanhoPalavra];
         char[] letrasPalavraSorteada = new char[tamanhoPalavra];
-        char letra;
+        char[] letra;
+        char letraTeste = 0;
 
         while (jogador.getTentativas() > 0) {
             String palavraFormada = "";
             int letraErrada = 0;
 
-            sorteioRoleta = roleta.sortear();
+            valorSorteadoRoleta = roleta.sortear();
             System.out.println("");
-            System.out.println("Foi Sorteado: " + sorteioRoleta);
+            System.out.println("Foi Sorteado: " + valorSorteadoRoleta);
 
-            if (sorteioRoleta.equals("Perde Tudo")) {
+            if (valorSorteadoRoleta.equals("Perde Tudo")) {
                 jogador.setTentativas(jogador.getTentativas() - 1);
                 jogador.setTotalPontos(0);
                 parametro.frasePerdeTudo(jogador.getTentativas());
 
-            } else if (sorteioRoleta.equals("Passa a Vez")) {
+            } else if (valorSorteadoRoleta.equals("Passa a Vez")) {
                 jogador.setTentativas(jogador.getTentativas() - 1);
                 parametro.frasePassaVez(jogador.getTentativas());
             } else {
-                letra = palavra.letrasPalavra().charAt(0);
+                letra = palavra.letrasPalavra();
+                
+                palavraCompleta = parametro.converteVetorCharString(letra);                
+                
+                if (palavraCompleta.length() > 1) {
+                    if (palavraCompleta.equals(palavraSorteada)){
+                        parametro.frasePalavraCorreta();
+                        break;
+                    } else {
+                        jogador.setTentativas(jogador.getTentativas() -1);
+                        parametro.frasePalavraIncorreta(jogador.getTentativas());
+                        continue;
+                    }
+                }
+                
+                for (int z = 0; z < letra.length; z++) {
+                    letraTeste = letra[z];
+                }
 
                 for (int i = 0; i < tamanhoPalavra; i++) {
                     letrasPalavraSorteada[i] = palavraSorteada.charAt(i);
                 }
 
                 for (int x = 0; x < tamanhoPalavra; x++) {
-                    if (letra == letrasPalavraSorteada[x]) {
-                        letrasCertas[x] = letra;
+                    if (letraTeste == letrasPalavraSorteada[x]) {
+                        letrasCertas[x] = letraTeste;
                     } else {
                         letraErrada++;
                     }
@@ -63,7 +82,9 @@ public class RodaRoda {
                 if (letraErrada >= tamanhoPalavra) {
                     jogador.setTentativas(jogador.getTentativas() - 1);
                     System.out.println("");
-                    parametro.frasePalavraErrada(jogador.getTentativas());
+                    parametro.fraseLetraIncorreta(jogador.getTentativas());
+                    System.out.println("A pontuação atual do(a) " + jogador.getNome() + " é: " + jogador.getTotalPontos());
+                    continue;                    
                 }
 
                 if (palavraFormada.equals(palavraSorteada)) {
@@ -71,7 +92,7 @@ public class RodaRoda {
                     break;
                 }
 
-                jogador.setTotalPontos(jogador.getTotalPontos() + Integer.parseInt(sorteioRoleta));
+                jogador.setTotalPontos(jogador.getTotalPontos() + Integer.parseInt(valorSorteadoRoleta));
                 System.out.println("");
             }
 

@@ -143,7 +143,7 @@ public class Parametros {
         return tentativa;
     }
 
-    public void frasePalavraErrada(int tentativa) {
+    public void fraseLetraIncorreta(int tentativa) {
         if (tentativa < 1) {
             System.out.println("Que pena, essa letra não existe na palavra!!!");
         } else {
@@ -158,5 +158,14 @@ public class Parametros {
         System.out.println("************* PARABÉNS, VOCÊ ACERTOU A PALAVRA!! *************");
         System.out.println("**************************************************************");
         System.out.println("");
+    }
+    
+    public void frasePalavraIncorreta(int tentativa) {
+        if (tentativa < 1) {
+            System.out.println("Que pena, você não acertou a palavra!!!");
+        } else {
+            System.out.println("Que pena, você não acertou a palavra!!!");
+            System.out.println("Mas não se preocupe, você ainda tem " + tentativa + " tentativa(s).");
+        }
     }
 }

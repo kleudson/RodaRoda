@@ -28,29 +28,58 @@ public class Palavras {
         return palavraSorteada;
     }
 
-    public String letrasPalavra() {
-        String palavraString;
+    public char[] letrasPalavra() {
+        char[] vetorLetraDigitada;
+        char[] vetorPalavraDigitada;
+        String letraDigitada;
+        String palavraDigitada;
         boolean eAlpha = false;
         int tamanhoPalavra;
         Scanner sc = new Scanner(System.in);
 
         do {
-            System.out.println("Digite somente uma letra");
-            palavraString = sc.nextLine().toLowerCase();
-            tamanhoPalavra = palavraString.length();
-            eAlpha = isAlpha(palavraString);
+            System.out.println("Digite somente uma letra ou digite '@' para informar a palavra!");
+            letraDigitada = sc.nextLine().toLowerCase();
+            tamanhoPalavra = letraDigitada.length();
+
+            if (letraDigitada.equals("@")) {
+                System.out.println("Digite a palavra completa.");
+                palavraDigitada = sc.nextLine();
+                tamanhoPalavra = palavraDigitada.length();
+                vetorPalavraDigitada = new char[tamanhoPalavra];
+                for (int i = 0; i < palavraDigitada.length(); i++) {
+                    vetorPalavraDigitada[i] = palavraDigitada.charAt(i);
+                }
+
+                return vetorPalavraDigitada;
+            }
+
+            tamanhoPalavra = letraDigitada.length();
+            eAlpha = isAlpha(letraDigitada);
             while (eAlpha == false) {
-                System.out.println("Digite apenas uma letra. Outros caracteres serão ignorados.");
-                palavraString = sc.nextLine().toLowerCase();
-                tamanhoPalavra = palavraString.length();
-                eAlpha = isAlpha(palavraString);
+                System.out.println("Digite apenas uma letra ou digite '@' para informar a palavra! \n"
+                        + "Outros caracteres serão ignorados.");
+                letraDigitada = sc.nextLine().toLowerCase();
+                tamanhoPalavra = letraDigitada.length();
+                vetorLetraDigitada = new char[tamanhoPalavra];
+                eAlpha = isAlpha(letraDigitada);
+
+                for (int x = 0; x < letraDigitada.length(); x++) {
+                    vetorLetraDigitada[x] = letraDigitada.charAt(x);
+                }
+
             }
         } while (tamanhoPalavra != 1);
-
-        return palavraString;
+        
+        vetorLetraDigitada = new char[tamanhoPalavra];
+        for (int y = 0; y < letraDigitada.length(); y++) {
+            vetorLetraDigitada[y] = letraDigitada.charAt(y);
+        }
+        
+        return vetorLetraDigitada;
     }
 
     public boolean isAlpha(String name) {
-        return name.matches("[a-zA-Z]+");
+        return name.matches("[a-zA-Z@]+");
     }
 }
