@@ -14,8 +14,6 @@ import java.util.Scanner;
  */
 public class Palavras {
 
-    Parametros parametro = new Parametros();
-
     public String sortearPalavra(List<String> arrayPalavras) {
         String palavraSorteada = "";
         double numeroAleatorio;

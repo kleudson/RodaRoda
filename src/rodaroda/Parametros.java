@@ -17,7 +17,8 @@ import java.util.List;
  * @author Kleudson
  */
 public class Parametros {
-
+    
+    Palavras palavra = new Palavras();
     private int qtdeJogadores;
     private int qtdePalavras;
     private int qtdeEtapas;
@@ -54,13 +55,13 @@ public class Parametros {
     public int qtdeJogadores() {
         Scanner sc;
         sc = new Scanner(System.in);
-
         System.out.println("Informe a Quantidade de jogadores");
         qtdeJogadores = sc.nextInt();
 
         while ((qtdeJogadores < 1) || (qtdeJogadores > 3)) {
             System.out.println("Por favor, escolha o número de jogadores. Minimo 1 e Máximo 3.");
             qtdeJogadores = sc.nextInt();
+            
         }
         return qtdeJogadores;
     }
