@@ -8,13 +8,11 @@ package rodaroda;
 import java.util.Scanner;
 
 /**
-
+ *
  * @author Kleudson e Wallace
- 
+ *
  */
-
-
-public class Roleta {   
+public class Roleta {
 
     public String sortear() {
 

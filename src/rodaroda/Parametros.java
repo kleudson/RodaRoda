@@ -1,7 +1,7 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor. 
+ * and open the template in the editor.
  */
 package rodaroda;
 
@@ -115,19 +115,47 @@ public class Parametros {
         return palavras;
     }
     
-    public String[] nomeDosJogadores(int quantidade) {
-        Scanner sc = new Scanner(System.in);
-        int qtdeRecebida = quantidade;
-        String nomeJogadores[] = new String[qtdeRecebida];
-        int contador = 0;
-        String jogador = "";
-        
-            while (contador < qtdeRecebida) {
-                System.out.println("Informe o nome do jogador " + (contador + 1) + ":");
-                jogador = sc.nextLine();
-                nomeJogadores[contador] = jogador;
-                contador++;
-            }
-        return nomeJogadores;
+    public String converteVetorCharString (char[] vetorChar){
+        String palavraString = "";
+        for (int i = 0; i < vetorChar.length; i++) {
+                    palavraString = palavraString + vetorChar[i];
+                }
+        return palavraString;
+    }
+
+    public void frasePerdeTudo(int tentativa) {
+        if (tentativa < 1) {
+            System.out.println("Que Azar Heim, PERDEU TUDO!!!!!!");
+        } else {
+            System.out.println("Que Azar Heim, PERDEU TUDO!!!!!!");
+            System.out.println("Mas não se preocupe, você ainda tem " + tentativa + " tentativa(s).");
+        }
+    }
+
+    public int frasePassaVez(int tentativa) {
+        if (tentativa < 1) {
+            System.out.println("Que Azar Heim, PASSOU A VEZ!!!");
+        } else {
+            System.out.println("Que Azar Heim, PASSOU A VEZ!!!");
+            System.out.println("Mas não se preocupe, você ainda tem " + tentativa + " tentativa(s).");
+        }
+        return tentativa;
+    }
+
+    public void frasePalavraErrada(int tentativa) {
+        if (tentativa < 1) {
+            System.out.println("Que pena, essa letra não existe na palavra!!!");
+        } else {
+            System.out.println("Que pena, essa letra não existe na palavra!!!");
+            System.out.println("Mas não se preocupe, você ainda tem " + tentativa + " tentativa(s).");
+        }
+    }
+
+    public void frasePalavraCorreta() {
+        System.out.println("");
+        System.out.println("**************************************************************");
+        System.out.println("************* PARABÉNS, VOCÊ ACERTOU A PALAVRA!! *************");
+        System.out.println("**************************************************************");
+        System.out.println("");
     }
 }

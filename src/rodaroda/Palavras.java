@@ -13,22 +13,23 @@ import java.util.Scanner;
  * @author Kleudson
  */
 public class Palavras {
-    
-        public String sortearPalavra(List<String> arrayPalavras){
-        String palavraSorteada = "";       
+    Parametros parametro = new Parametros();
+
+    public String sortearPalavra(List<String> arrayPalavras) {
+        String palavraSorteada = "";
         double numeroAleatorio;
         int numeroSorteado;
 
         numeroAleatorio = Math.random() * arrayPalavras.size();
         numeroAleatorio = Math.floor(numeroAleatorio);
         numeroSorteado = (int) numeroAleatorio;
-        
+
         palavraSorteada = arrayPalavras.set(numeroSorteado, "");
-               
+
         return palavraSorteada;
     }
-    
-        public String letrasPalavra() {
+
+    public String letrasPalavra() {
         String palavraString;
         boolean eAlpha = false;
         int tamanhoPalavra;
@@ -53,41 +54,43 @@ public class Palavras {
     public boolean isAlpha(String name) {
         return name.matches("[a-zA-Z]+");
     }
-    
-    public void compararLetras(char letraInformada, String palavraSorteada) {
+
+    public char[] compararLetras(char letraInformada, String palavraSorteada, char[] vetorPalavraFormada, int tentativas) {
         int tamanhoPalavra = palavraSorteada.length();
         int letraErrada = 0;
-        String  palavraFormada = "";
-        char letrasCertas[] = new char [tamanhoPalavra];
+        char letrasCertas[] = new char[tamanhoPalavra];
         char[] letrasPalavraSorteada = new char[tamanhoPalavra];
         
+        for (int y = 0; y < tamanhoPalavra; y++) {
+            letrasCertas[y] = vetorPalavraFormada[y];
+        }
+
         for (int i = 0; i < tamanhoPalavra; i++) {
             letrasPalavraSorteada[i] = palavraSorteada.charAt(i);
         }
-        
-            for (int x = 0; x < tamanhoPalavra; x++){
-                if (letraInformada == letrasPalavraSorteada[x]){
-                    letrasCertas[x] = letraInformada;
-                } else {
-                    letraErrada++;
-                }
-                
-                if (letrasCertas[x] == letrasPalavraSorteada[x]){
-                    palavraFormada = palavraFormada + letrasCertas[x];
-                    System.out.print("  "+letrasCertas[x]+"  ");
-                } else {
-                    System.out.print(" __ ");
-                }
+
+        for (int x = 0; x < tamanhoPalavra; x++) {
+            if (letraInformada == letrasPalavraSorteada[x]) {
+                letrasCertas[x] = letraInformada;
+            } else {
+                letraErrada++;
             }
-            
-            if (letraErrada >= tamanhoPalavra){
-                System.out.println("Não existe essa letra na palavra!");
+
+            if (letrasCertas[x] == letrasPalavraSorteada[x]) {
+                vetorPalavraFormada[x] = letrasCertas[x];
+                System.out.print("  " + letrasCertas[x] + "  ");
+            } else {
+                System.out.print(" __ ");
             }
-            
-            if (palavraFormada.equals(palavraSorteada)){
-                System.out.println("**************************************************************");
-                System.out.println("************* PARABÉNS, VOCÊ ACERTOU A PALAVRA!! *************");
-                System.out.println("**************************************************************");
-            }
+        }
+
+        if (letraErrada >= tamanhoPalavra) {
+            tentativas --;
+            System.out.println("");
+            parametro.frasePalavraErrada(tentativas);
+            Jogadores umjogador = new Jogadores();
+            umjogador.setTentativas(tentativas);
+        }
+        return vetorPalavraFormada;
     }
 }
