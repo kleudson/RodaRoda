@@ -5,8 +5,6 @@
  */
 package rodaroda;
 
-import java.util.Scanner;
-
 /**
  *
  * @author Kleudson e Wallace

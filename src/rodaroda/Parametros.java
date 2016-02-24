@@ -114,12 +114,12 @@ public class Parametros {
         }
         return palavras;
     }
-    
-    public String converteVetorCharString (char[] vetorChar){
+
+    public String converteVetorCharString(char[] vetorChar) {
         String palavraString = "";
         for (int i = 0; i < vetorChar.length; i++) {
-                    palavraString = palavraString + vetorChar[i];
-                }
+            palavraString = palavraString + vetorChar[i];
+        }
         return palavraString;
     }
 

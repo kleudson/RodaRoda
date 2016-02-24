@@ -49,22 +49,18 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        String sorteioRoleta;
         String nomeUm;
         String nomeDois;
         String nomeTres;
         String tema;
         String palavraSorteada;
-        char letra;
         String[] vetorNomeJogadores;
-        Jogadores[] vetorJogadores;
         List<String> listPalavras;
         List<Jogadores> listJogadores = new ArrayList<>();
         int qtdeJogadores, qtdeEtapas, qtdePalavras;
         int totalTentativas = 3;
         int totalPontos = 0;
         int contador = 0;
-        Roleta roleta = new Roleta();
         Palavras palavra = new Palavras();
         Parametros parametros = new Parametros();
         Jogadores jogador1 = new Jogadores();

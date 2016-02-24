@@ -17,11 +17,14 @@ public class RodaRoda {
 
     public void iniciarJogo(int qtdeJogadores, Jogadores jogador, String palavraSorteada) {
         String sorteioRoleta = "";
-        String palavraFormadaCompleta = "";
-        char[] palavraFormada = new char[palavraSorteada.length()];
+        int tamanhoPalavra = palavraSorteada.length();
+        char letrasCertas[] = new char[tamanhoPalavra];
+        char[] letrasPalavraSorteada = new char[tamanhoPalavra];
         char letra;
 
         while (jogador.getTentativas() > 0) {
+            String palavraFormada = "";
+            int letraErrada = 0;
 
             sorteioRoleta = roleta.sortear();
             System.out.println("");
@@ -36,20 +39,38 @@ public class RodaRoda {
                 jogador.setTentativas(jogador.getTentativas() - 1);
                 parametro.frasePassaVez(jogador.getTentativas());
             } else {
-                int tentativas = jogador.getTentativas();
-                int ultimo tamanhoVetor;
                 letra = palavra.letrasPalavra().charAt(0);
-                palavraFormada = palavra.compararLetras(letra, palavraSorteada, palavraFormada, tentativas);
-                
-                
 
-                palavraFormadaCompleta = parametro.converteVetorCharString(palavraFormada);
+                for (int i = 0; i < tamanhoPalavra; i++) {
+                    letrasPalavraSorteada[i] = palavraSorteada.charAt(i);
+                }
 
-                if (palavraFormadaCompleta.equals(palavraSorteada)) {
+                for (int x = 0; x < tamanhoPalavra; x++) {
+                    if (letra == letrasPalavraSorteada[x]) {
+                        letrasCertas[x] = letra;
+                    } else {
+                        letraErrada++;
+                    }
+
+                    if (letrasCertas[x] == letrasPalavraSorteada[x]) {
+                        palavraFormada = palavraFormada + letrasCertas[x];
+                        System.out.print("  " + letrasCertas[x] + "  ");
+                    } else {
+                        System.out.print(" __ ");
+                    }
+                }
+
+                if (letraErrada >= tamanhoPalavra) {
+                    jogador.setTentativas(jogador.getTentativas() - 1);
+                    System.out.println("");
+                    parametro.frasePalavraErrada(jogador.getTentativas());
+                }
+
+                if (palavraFormada.equals(palavraSorteada)) {
                     parametro.frasePalavraCorreta();
                     break;
                 }
-                jogador.setTentativas(tentativas);
+
                 jogador.setTotalPontos(jogador.getTotalPontos() + Integer.parseInt(sorteioRoleta));
                 System.out.println("");
             }
