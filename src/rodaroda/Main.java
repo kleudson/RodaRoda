@@ -61,6 +61,7 @@ public class Main {
         int totalTentativas = 3;
         int totalPontos = 0;
         int contador = 0;
+        Jogadores [] vetorDoisJogadores = new Jogadores[2];
         Palavras palavra = new Palavras();
         Parametros parametros = new Parametros();
         Jogadores jogador1 = new Jogadores();
@@ -95,6 +96,7 @@ public class Main {
                 jogador1.imprimirDadosJogadores(listJogadores);
 
                 System.out.println("Dica: a palavra contém " + palavraSorteada.length() + " letras.");
+                System.out.println("");
                 
                 rodaRoda.iniciarJogo(qtdeJogadores, jogador1, palavraSorteada);
 
@@ -110,7 +112,21 @@ public class Main {
                 listJogadores.add(jogador1);
                 listJogadores.add(jogador2);
 
-                jogador1.imprimirDadosJogadores(listJogadores);
+                jogador1.imprimirDadosJogadoresMultiplayer(listJogadores);
+                
+                System.out.println("Dica: a palavra contém " + palavraSorteada.length() + " letras.");
+                
+                rodaRoda.iniciarJogoDois(qtdeJogadores, jogador1, jogador2, palavraSorteada);
+                
+                jogador1.imprimirDadosJogadoresMultiplayer(listJogadores);
+                
+                if (jogador1.getTotalPontos() > jogador2.getTotalPontos()){
+                    parametros.fraseCampeao(jogador1.getNome());
+                } else {
+                    parametros.fraseCampeao(jogador2.getNome());
+                }
+
+                
             } else {
                 nomeUm = vetorNomeJogadores[contador];
                 contador++;
@@ -125,8 +141,22 @@ public class Main {
                 listJogadores.add(jogador1);
                 listJogadores.add(jogador2);
                 listJogadores.add(jogador3);
-
-                jogador1.imprimirDadosJogadores(listJogadores);
+                
+                jogador1.imprimirDadosJogadoresMultiplayer(listJogadores);
+                
+                System.out.println("Dica: a palavra contém " + palavraSorteada.length() + " letras.");
+                
+                rodaRoda.iniciarJogoTres(qtdeJogadores, jogador1, jogador2, jogador3, palavraSorteada);
+                
+                jogador1.imprimirDadosJogadoresMultiplayer(listJogadores);
+                
+                if ((jogador1.getTotalPontos() > jogador2.getTotalPontos()) && (jogador1.getTotalPontos() > jogador3.getTotalPontos())){
+                    parametros.fraseCampeao(jogador1.getNome());
+                } else if ((jogador2.getTotalPontos() > jogador1.getTotalPontos()) && (jogador2.getTotalPontos() > jogador3.getTotalPontos())) {
+                    parametros.fraseCampeao(jogador2.getNome());
+                } else {
+                    parametros.fraseCampeao(jogador3.getNome());
+                }
             }
 
         System.out.println("");

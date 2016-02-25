@@ -142,6 +142,25 @@ public class Parametros {
         }
         return tentativa;
     }
+    
+    public void frasePassaVezMultiplayer() {
+            System.out.println("Que Azar Heim, PASSOU A VEZ!!!");
+            System.out.println("");
+        }
+
+    
+
+    public void frasePontuacaoAtual(String nome, int pontuacao) {
+        System.out.println("######");
+        System.out.println("######"+nome+": "+pontuacao+ " Pontos ######");
+        System.out.println("######");
+        System.out.println("");
+    }
+    
+        public void frasePerdeTudoMultiplayer() {
+            System.out.println("Que Azar Heim, PERDEU TUDO!!!!!!");
+            System.out.println("");
+    }
 
     public void fraseLetraIncorreta(int tentativa) {
         if (tentativa < 1) {
@@ -151,13 +170,34 @@ public class Parametros {
             System.out.println("Mas não se preocupe, você ainda tem " + tentativa + " tentativa(s).");
         }
     }
+    
+        public void fraseLetraIncorretaMultiplayer() {
+            System.out.println("Que pena, essa letra não existe na palavra!!!"); 
+            System.out.println("");
+    }
+    
+        
 
-    public void frasePalavraCorreta() {
+    public void frasePalavraCorreta(String nome) {
         System.out.println("");
-        System.out.println("**************************************************************");
-        System.out.println("************* PARABÉNS, VOCÊ ACERTOU A PALAVRA!! *************");
-        System.out.println("**************************************************************");
+        System.out.println("*************************************************************************************");
+        System.out.println("************* PARABÉNS "+nome.toUpperCase()+", VOCÊ ACERTOU A PALAVRA!! *************");
+        System.out.println("*************************************************************************************");
         System.out.println("");
+    }
+    
+        public void fraseCampeao(String nome) {
+        System.out.println("*************************************************************************************");
+        System.out.println("************* "+nome.toUpperCase()+", VENCEU O JOGO!!! *************");
+        System.out.println("*************************************************************************************");
+            System.out.println("");
+    }
+    
+    public void fraseVezJogar(String nome, int pontuacao) {
+        System.out.println("*****");
+        System.out.println("***** " + nome.toUpperCase() + ", É A SUA VEZ DE JOGAR!! *************");
+        System.out.println("***** PONTUAÇÃO: "+pontuacao+" Pontos.");
+        System.out.println("*****");
     }
     
     public void frasePalavraIncorreta(int tentativa) {
@@ -168,4 +208,9 @@ public class Parametros {
             System.out.println("Mas não se preocupe, você ainda tem " + tentativa + " tentativa(s).");
         }
     }
+    
+        public void frasePalavraIncorretaMultiplayer() {
+            System.out.println("Que pena, você não acertou a palavra!!!");        
+    }
+    
 }

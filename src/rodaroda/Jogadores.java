@@ -79,4 +79,13 @@ public class Jogadores {
             System.out.println("Total de Pontos: " + jogadores.get(i).getTotalPontos());
         }
     }
+    
+    public void imprimirDadosJogadoresMultiplayer(List<Jogadores> jogadores) {
+        for (int i = 0; i < jogadores.size(); i++) {
+            System.out.println("");
+            System.out.println("########## JOGADOR 0" + (i + 1) + " ##########");
+            System.out.println("Nome: " + jogadores.get(i).getNome());
+            System.out.println("Total de Pontos: " + jogadores.get(i).getTotalPontos());
+        }
+    }
 }
