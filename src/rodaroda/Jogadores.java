@@ -5,6 +5,8 @@
  */
 package rodaroda;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -54,38 +56,45 @@ public class Jogadores {
         this.tentativas = tentativas;
     }
 
-    public String[] nomeDosJogadores(int quantidade) {
+    public List<String> nomeDosJogadores(int quantidade) {
         Scanner sc = new Scanner(System.in);
         int qtdeRecebida = quantidade;
-        String nomeJogadores[] = new String[qtdeRecebida];
+        List<String> nomeJogadores = new ArrayList<>();
         int contador = 0;
         String jogador = "";
 
         while (contador < qtdeRecebida) {
             System.out.println("Informe o nome do jogador " + (contador + 1) + ":");
             jogador = sc.nextLine();
-            nomeJogadores[contador] = jogador;
+            nomeJogadores.add(jogador);
             contador++;
         }
         return nomeJogadores;
     }
 
     public void imprimirDadosJogadores(List<Jogadores> jogadores) {
-        for (int i = 0; i < jogadores.size(); i++) {
+        int i = 0;
+        Iterator<Jogadores> iteradorJogador = jogadores.iterator();
+
+        while (iteradorJogador.hasNext()) {
             System.out.println("");
             System.out.println("########## JOGADOR 0" + (i + 1) + " ##########");
             System.out.println("Nome: " + jogadores.get(i).getNome());
-            System.out.println("Tentativas: " + jogadores.get(i).getTentativas());
             System.out.println("Total de Pontos: " + jogadores.get(i).getTotalPontos());
+            iteradorJogador.next();
+            i++;
         }
     }
     
     public void imprimirDadosJogadoresMultiplayer(List<Jogadores> jogadores) {
-        for (int i = 0; i < jogadores.size(); i++) {
+        int i = 0;        
+        for (Iterator <Jogadores> iteradorFor = jogadores.iterator(); iteradorFor.hasNext();){
             System.out.println("");
             System.out.println("########## JOGADOR 0" + (i + 1) + " ##########");
             System.out.println("Nome: " + jogadores.get(i).getNome());
             System.out.println("Total de Pontos: " + jogadores.get(i).getTotalPontos());
+            iteradorFor.next();
+            i++;
         }
     }
 }
