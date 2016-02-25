@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *Classe Jgoadores, onde é criado o Objeto Jogadores para 1, 2 ou 3 jogadores;
  */
 package rodaroda;
 
@@ -77,6 +75,8 @@ public class Jogadores {
     public void setVezDeJogar(boolean vezDeJogar) {
         this.vezDeJogar = vezDeJogar;        
     }
+    
+//    Método cria List de Nomes e retorna esses valores;
 
     public List<String> nomeDosJogadores(int quantidade) {
         Scanner sc = new Scanner(System.in);
@@ -93,6 +93,10 @@ public class Jogadores {
         }
         return nomeJogadores;
     }
+    
+//      Método responsável por imprimir o nome e as informações dos participantes
+//      Foi implementado o Padrão Iterator com While para imprimir a lista.
+//      Método responsável para 1 jogador
 
     public void imprimirDadosJogadores(List<Jogadores> jogadores) {
         int i = 0;
@@ -107,6 +111,10 @@ public class Jogadores {
             i++;
         }
     }
+    
+//      Método responsável por imprimir o nome e as informações dos participantes
+//      Foi implementado o Padrão Iterator com While para imprimir a lista.
+//      Método responsável para mais de um jogador
     
     public void imprimirDadosJogadoresMultiplayer(List<Jogadores> jogadores) {
         int i = 0;        

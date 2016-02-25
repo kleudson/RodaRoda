@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Classe responsável por definir se inicializará para 1 Jogador, 2 Jogadores ou 3 Jogadores
+   
  */
 package rodaroda;
 
@@ -16,7 +15,8 @@ import rodaroda.strategy.RoletaViciada;
 public class RodaRoda {
     Palavras palavra = new Palavras();
     Parametros parametro = new Parametros();
-
+    
+    //Métodos responsável por Iniciar o Jogo para um jogador, passando vários parâmetros;
     public void iniciarJogo(int qtdeJogadores, Jogadores jogador, String palavraSorteada, boolean roletaViciada) {
         String valorSorteadoRoleta = "";
         String palavraCompleta = "";
@@ -108,6 +108,8 @@ public class RodaRoda {
             System.out.println("A pontuação atual do(a) " + jogador.getNome() + " é: " + jogador.getTotalPontos());
         }
     }
+    
+    //Métodos responsável por Iniciar o Jogo para dois jogadores, passando vários parâmetros necessários;
 
     public void iniciarJogoDois(int qtdeJogadores, Jogadores jogador1, Jogadores jogador2, String palavraSorteada, boolean roletaViciada) {
         String valorSorteadoRoleta = "";
@@ -298,6 +300,7 @@ public class RodaRoda {
         }
     }
 
+    //Métodos responsável por Iniciar o Jogo para três jogadores, passando vários parâmetros necessários;
     public void iniciarJogoTres(int qtdeJogadores, Jogadores jogador1, Jogadores jogador2, Jogadores jogador3, String palavraSorteada, boolean roletaViciada) {
         String valorSorteadoRoleta = "";
         String palavraCompleta = "";

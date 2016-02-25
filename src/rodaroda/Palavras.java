@@ -1,8 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+ * Classe trata as palavras Sorteadas e confere cada caracter para saber se o usuário acertou a letra ou não.
+   Essa classe tem alguns métodos de formatação de texto. 
+*/
 package rodaroda;
 
 import java.util.List;
@@ -13,6 +12,8 @@ import java.util.Scanner;
  * @author Kleudson
  */
 public class Palavras {
+    
+//    Método sorteia uma palavra de forma aleatória.
 
     public String sortearPalavra(List<String> arrayPalavras) {
         String palavraSorteada = "";
@@ -27,6 +28,9 @@ public class Palavras {
 
         return palavraSorteada;
     }
+//    
+//    Método solicita a entrada de uma letra para comparar com a palavra que foi sorteada
+//    Também evita que o usuário digite caracteres incorretos
 
     public char[] letrasPalavra() {
         char[] vetorLetraDigitada;
@@ -79,14 +83,15 @@ public class Palavras {
         return vetorLetraDigitada;
     }
 
+    //Métodos para limitar os caracteres aceitos
     public boolean isAlpha(String name) {
         return name.matches("[a-zA-Z@]+");
     }
-    
+    //Métodos para limitar os caracteres aceitos
     public boolean isAlphaVezDeJogar(String letra) {
         return letra.matches("[s,n,S,N]+");
     }
-    
+    //Métodos para limitar os caracteres aceitos
     public boolean isNumero(String numero) {
         return numero.matches("[0-9]+");
     }

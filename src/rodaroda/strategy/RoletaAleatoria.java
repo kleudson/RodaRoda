@@ -1,8 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Foi pedido duas Estratégias diferentes para a roleta. Viciada e Aleatória.
+//  Essa é a Roleta Aleatória, sempre que o jogador girar a roleta ela escolherá um valor aleatório. 
+//  Atributo qtdeGiros é monitorado
+
 package rodaroda.strategy;
 
 import rodaroda.Jogadores;

@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Classe principal
+   Nessa classe são carregadas as informações e onde é iniciado o programa.
  */
 package rodaroda;
 
@@ -62,8 +61,8 @@ public class Main {
         System.out.println("Quantidade de palavras escolhida é: " + qtdePalavras);
         System.out.println("O tema escolhido aleatóriamente foi: " + tema);
         System.out.println("");
-
-
+        
+//        Inicia o jogo com a quantidade de jogador escolhida pelo usuário.
             if (qtdeJogadores == 1) {
                 Iterator <String> iterador = ListNomeJogadores.iterator();
                 while (iterador.hasNext()){
