@@ -82,4 +82,12 @@ public class Palavras {
     public boolean isAlpha(String name) {
         return name.matches("[a-zA-Z@]+");
     }
+    
+    public boolean isAlphaVezDeJogar(String letra) {
+        return letra.matches("[s,n,S,N]+");
+    }
+    
+    public boolean isNumero(String numero) {
+        return numero.matches("[0-9]+");
+    }
 }

@@ -28,13 +28,14 @@ public class Main {
         String tema;
         String palavraSorteada;
         List<String> ListNomeJogadores = new ArrayList();
-        String[] vetorNomeJogadores;
         List<String> listPalavras;
         List<Jogadores> listJogadores = new ArrayList<>();
         int qtdeJogadores, qtdeEtapas, qtdePalavras;
         int totalTentativas = 3;
         int totalPontos = 0;
-        int contador = 0;
+        int qtdeGiros = 0;
+        boolean vezDeJogar = false;
+        boolean roletaViciada = false;
         Palavras palavra = new Palavras();
         Parametros parametros = new Parametros();
         Jogadores jogador1 = new Jogadores();
@@ -50,6 +51,8 @@ public class Main {
         listPalavras = parametros.escolheArquivoTxt(tema);
 
         palavraSorteada = palavra.sortearPalavra(listPalavras);
+        
+        roletaViciada = parametros.roletaViciada();
 
         ListNomeJogadores = jogador1.nomeDosJogadores(qtdeJogadores);
 
@@ -66,7 +69,7 @@ public class Main {
                 while (iterador.hasNext()){
                     nomeUm = iterador.next();
                 }
-                jogador1.jogadores(nomeUm, totalPontos, totalTentativas);
+                jogador1.jogadores(nomeUm, totalPontos, totalTentativas, qtdeGiros, vezDeJogar);
                 listJogadores.add(jogador1);
 
                 jogador1.imprimirDadosJogadores(listJogadores);
@@ -74,7 +77,7 @@ public class Main {
                 System.out.println("Dica: a palavra contém " + palavraSorteada.length() + " letras.");
                 System.out.println("");
                 
-                rodaRoda.iniciarJogo(qtdeJogadores, jogador1, palavraSorteada);
+                rodaRoda.iniciarJogo(qtdeJogadores, jogador1, palavraSorteada, roletaViciada);
 
             } else if (qtdeJogadores == 2) {
                  Iterator <String> iterador = ListNomeJogadores.iterator();
@@ -83,8 +86,8 @@ public class Main {
                     nomeDois = iterador.next();
                 }
 
-                jogador1.jogadores(nomeUm, totalPontos, totalTentativas);
-                jogador2.jogadores(nomeDois, totalPontos, totalTentativas);
+                jogador1.jogadores(nomeUm, totalPontos, totalTentativas, qtdeGiros, vezDeJogar);
+                jogador2.jogadores(nomeDois, totalPontos, totalTentativas, qtdeGiros, vezDeJogar);
 
                 listJogadores.add(jogador1);
                 listJogadores.add(jogador2);
@@ -93,7 +96,7 @@ public class Main {
                 
                 System.out.println("Dica: a palavra contém " + palavraSorteada.length() + " letras.");
                 
-                rodaRoda.iniciarJogoDois(qtdeJogadores, jogador1, jogador2, palavraSorteada);
+                rodaRoda.iniciarJogoDois(qtdeJogadores, jogador1, jogador2, palavraSorteada, roletaViciada);
                 
                 jogador1.imprimirDadosJogadoresMultiplayer(listJogadores);
                 
@@ -112,9 +115,9 @@ public class Main {
                     nomeTres = iterador.next();
                 }
 
-                jogador1.jogadores(nomeUm, totalPontos, totalTentativas);
-                jogador2.jogadores(nomeDois, totalPontos, totalTentativas);
-                jogador3.jogadores(nomeTres, totalPontos, totalTentativas);
+                jogador1.jogadores(nomeUm, totalPontos, totalTentativas, qtdeGiros, vezDeJogar);
+                jogador2.jogadores(nomeDois, totalPontos, totalTentativas, qtdeGiros, vezDeJogar);
+                jogador3.jogadores(nomeTres, totalPontos, totalTentativas, qtdeGiros, vezDeJogar);
 
                 listJogadores.add(jogador1);
                 listJogadores.add(jogador2);
@@ -124,7 +127,7 @@ public class Main {
                 
                 System.out.println("Dica: a palavra contém " + palavraSorteada.length() + " letras.");
                 
-                rodaRoda.iniciarJogoTres(qtdeJogadores, jogador1, jogador2, jogador3, palavraSorteada);
+                rodaRoda.iniciarJogoTres(qtdeJogadores, jogador1, jogador2, jogador3, palavraSorteada, roletaViciada);
                 
                 jogador1.imprimirDadosJogadoresMultiplayer(listJogadores);
                 
@@ -140,5 +143,4 @@ public class Main {
         System.out.println("");
         System.out.println("FIM DE JOGO ");
     }
-
 }

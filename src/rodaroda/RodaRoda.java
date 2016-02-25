@@ -5,17 +5,19 @@
  */
 package rodaroda;
 
+import rodaroda.strategy.RoletaAleatoria;
+import rodaroda.strategy.RoletaStrategy;
+import rodaroda.strategy.RoletaViciada;
+
 /**
  *
  * @author Kleudson
  */
 public class RodaRoda {
-
-    Roleta roleta = new Roleta();
     Palavras palavra = new Palavras();
     Parametros parametro = new Parametros();
 
-    public void iniciarJogo(int qtdeJogadores, Jogadores jogador, String palavraSorteada) {
+    public void iniciarJogo(int qtdeJogadores, Jogadores jogador, String palavraSorteada, boolean roletaViciada) {
         String valorSorteadoRoleta = "";
         String palavraCompleta = "";
         int tamanhoPalavra = palavraSorteada.length();
@@ -23,12 +25,19 @@ public class RodaRoda {
         char[] letrasPalavraSorteada = new char[tamanhoPalavra];
         char[] letra;
         char letraTeste = 0;
+        RoletaStrategy roletaStrategy = new RoletaStrategy(new RoletaViciada());
 
         while (jogador.getTentativas() > 0) {
             String palavraFormada = "";
             int letraErrada = 0;
+            
+            if (roletaViciada){
+               valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador);
+            } else {
+                roletaStrategy = new RoletaStrategy(new RoletaAleatoria());
+                valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador);
+            }  
 
-            valorSorteadoRoleta = roleta.sortear();
             System.out.println("");
             System.out.println("Foi Sorteado: " + valorSorteadoRoleta);
 
@@ -100,7 +109,7 @@ public class RodaRoda {
         }
     }
 
-    public void iniciarJogoDois(int qtdeJogadores, Jogadores jogador1, Jogadores jogador2, String palavraSorteada) {
+    public void iniciarJogoDois(int qtdeJogadores, Jogadores jogador1, Jogadores jogador2, String palavraSorteada, boolean roletaViciada) {
         String valorSorteadoRoleta = "";
         String palavraCompleta = "";
         int tamanhoPalavra = palavraSorteada.length();
@@ -110,17 +119,26 @@ public class RodaRoda {
         char letraTeste = 0;
         int vezJogador = 0;
         boolean fimDeJogo = false;
+        RoletaStrategy roletaStrategy = new RoletaStrategy(new RoletaViciada());
 
         while (fimDeJogo == false) {
 
             if (vezJogador == 0) {
+                jogador1.setVezDeJogar(true);
+                jogador2.setVezDeJogar(false);
                 System.out.println("");
                 parametro.fraseVezJogar(jogador1.getNome(), jogador1.getTotalPontos());
 
                 String palavraFormada = "";
                 int letraErrada = 0;
+                
+                if (roletaViciada) {
+                    valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador1);
+                } else {
+                    roletaStrategy = new RoletaStrategy(new RoletaAleatoria());
+                    valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador1);
+                }
 
-                valorSorteadoRoleta = roleta.sortear();
                 System.out.println("");
                 System.out.println("Foi Sorteado: " + valorSorteadoRoleta);
 
@@ -192,12 +210,20 @@ public class RodaRoda {
                 }
                 parametro.frasePontuacaoAtual(jogador1.getNome().toUpperCase(), jogador1.getTotalPontos());
             } else {
+                jogador1.setVezDeJogar(false);
+                jogador2.setVezDeJogar(true);
                 System.out.println("");
                 parametro.fraseVezJogar(jogador2.getNome(), jogador2.getTotalPontos());
                 String palavraFormada = "";
                 int letraErrada = 0;
+                
+                if (roletaViciada) {
+                    valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador2);
+                } else {
+                    roletaStrategy = new RoletaStrategy(new RoletaAleatoria());
+                    valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador2);
+                }
 
-                valorSorteadoRoleta = roleta.sortear();
                 System.out.println("");
                 System.out.println("Foi Sorteado: " + valorSorteadoRoleta);
 
@@ -272,7 +298,7 @@ public class RodaRoda {
         }
     }
 
-    public void iniciarJogoTres(int qtdeJogadores, Jogadores jogador1, Jogadores jogador2, Jogadores jogador3, String palavraSorteada) {
+    public void iniciarJogoTres(int qtdeJogadores, Jogadores jogador1, Jogadores jogador2, Jogadores jogador3, String palavraSorteada, boolean roletaViciada) {
         String valorSorteadoRoleta = "";
         String palavraCompleta = "";
         int tamanhoPalavra = palavraSorteada.length();
@@ -282,17 +308,27 @@ public class RodaRoda {
         char letraTeste = 0;
         int vezJogador = 0;
         boolean fimDeJogo = false;
+        RoletaStrategy roletaStrategy = new RoletaStrategy(new RoletaViciada());
 
         while (fimDeJogo == false) {
 
             if (vezJogador == 0) {
+                jogador1.setVezDeJogar(true);
+                jogador2.setVezDeJogar(false);
+                jogador3.setVezDeJogar(false);
                 System.out.println("");
                 parametro.fraseVezJogar(jogador1.getNome(), jogador1.getTotalPontos());
 
                 String palavraFormada = "";
                 int letraErrada = 0;
+                
+                if (roletaViciada) {
+                    valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador1);
+                } else {
+                    roletaStrategy = new RoletaStrategy(new RoletaAleatoria());
+                    valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador1);
+                }
 
-                valorSorteadoRoleta = roleta.sortear();
                 System.out.println("");
                 System.out.println("Foi Sorteado: " + valorSorteadoRoleta);
 
@@ -364,12 +400,22 @@ public class RodaRoda {
                 }
                 parametro.frasePontuacaoAtual(jogador1.getNome().toUpperCase(), jogador1.getTotalPontos());
             } else if (vezJogador == 1) {
+                jogador1.setVezDeJogar(false);
+                jogador2.setVezDeJogar(true);
+                jogador3.setVezDeJogar(false);
+                
                 System.out.println("");
                 parametro.fraseVezJogar(jogador2.getNome(), jogador2.getTotalPontos());
                 String palavraFormada = "";
                 int letraErrada = 0;
+                
+                if (roletaViciada) {
+                    valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador2);
+                } else {
+                    roletaStrategy = new RoletaStrategy(new RoletaAleatoria());
+                    valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador2);
+                }
 
-                valorSorteadoRoleta = roleta.sortear();
                 System.out.println("");
                 System.out.println("Foi Sorteado: " + valorSorteadoRoleta);
 
@@ -441,12 +487,22 @@ public class RodaRoda {
                 }
                 parametro.frasePontuacaoAtual(jogador2.getNome(), jogador2.getTotalPontos());
             } else {
+                jogador1.setVezDeJogar(false);
+                jogador2.setVezDeJogar(false);
+                jogador3.setVezDeJogar(true);
+                
                 System.out.println("");
                 parametro.fraseVezJogar(jogador3.getNome(), jogador3.getTotalPontos());
                 String palavraFormada = "";
                 int letraErrada = 0;
+                
+                if (roletaViciada) {
+                    valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador3);
+                } else {
+                    roletaStrategy = new RoletaStrategy(new RoletaAleatoria());
+                    valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador3);
+                }
 
-                valorSorteadoRoleta = roleta.sortear();
                 System.out.println("");
                 System.out.println("Foi Sorteado: " + valorSorteadoRoleta);
 

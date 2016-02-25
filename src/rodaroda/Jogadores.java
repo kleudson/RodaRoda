@@ -19,17 +19,23 @@ public class Jogadores {
     private String nome;
     private int totalPontos;
     private int tentativas;
+    private int qtdeGiros;
+    private boolean vezDeJogar;
 
     /**
      *
      * @param nome
      * @param totalPontos
      * @param tentativas
+     * @param qtdeGiros
+     * @param vezDeJogar
      */
-    public void jogadores(String nome, int totalPontos, int tentativas) {
+    public void jogadores(String nome, int totalPontos, int tentativas, int qtdeGiros, boolean vezDeJogar) {
         this.nome = nome;
         this.totalPontos = totalPontos;
         this.tentativas = tentativas;
+        this.qtdeGiros = qtdeGiros;
+        this.vezDeJogar = vezDeJogar;
     }
 
     public String getNome() {
@@ -54,6 +60,22 @@ public class Jogadores {
 
     public void setTentativas(int tentativas) {
         this.tentativas = tentativas;
+    }
+    
+    public int getQtdeGiros() {
+        return qtdeGiros;
+    }
+    
+    public void setQtdeGiros (int qtdeGiros) {
+        this.qtdeGiros = qtdeGiros;
+    }
+     
+    public boolean getVezDeJogar () {
+        return vezDeJogar;
+    } 
+    
+    public void setVezDeJogar(boolean vezDeJogar) {
+        this.vezDeJogar = vezDeJogar;        
     }
 
     public List<String> nomeDosJogadores(int quantidade) {
