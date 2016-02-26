@@ -113,7 +113,7 @@ public class Jogadores {
     }
     
 //      Método responsável por imprimir o nome e as informações dos participantes
-//      Foi implementado o Padrão Iterator com While para imprimir a lista.
+//      Foi implementado o Padrão Iterator com For para imprimir a lista.
 //      Método responsável para mais de um jogador
     
     public void imprimirDadosJogadoresMultiplayer(List<Jogadores> jogadores) {
