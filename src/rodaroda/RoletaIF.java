@@ -2,7 +2,7 @@
  * Implementação do Strategy.
    Interface RoletaIF
  */
-package rodaroda.strategy;
+package rodaroda;
 
 import rodaroda.Jogadores;
 

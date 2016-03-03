@@ -3,7 +3,7 @@
   Essa é a roleta Viciada, sempre que o jogador girar a roleta pela segunda vez, irá passar a vez. 
   Atributo qtdeGiros é monitorado
  */
-package rodaroda.strategy;
+package rodaroda;
 
 import rodaroda.Jogadores;
 
@@ -52,7 +52,7 @@ public class RoletaViciada implements RoletaIF {
             }
         } else {
             String passaVez = "Passa a Vez";
-            jogadores.setQtdeGiros(jogadores.getQtdeGiros() + 1);
+            jogadores.setQtdeGiros(0);
             return  passaVez;
         }
     }

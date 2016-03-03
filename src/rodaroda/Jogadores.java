@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+
 /**
  *
  * @author Kleudson
@@ -22,12 +23,18 @@ public class Jogadores {
 
     /**
      *
-     * @param nome
-     * @param totalPontos
-     * @param tentativas
-     * @param qtdeGiros
-     * @param vezDeJogar
+     * @param nome Entrada de nome do jogador
+     * @param totalPontos Entrada de pontos do jogador
+     * @param tentativas Entrada de tentativas do jogador
+     * @param qtdeGiros Entrada de giros do jogador
+     * @param vezDeJogar Entrada de vez do jogador
      */
+//    
+//    public Jogadores (SujeitoAtualizar sujeito) {
+//        this.subject = sujeito;
+//        this.subject.addObserver(this);
+//    }
+    
     public void jogadores(String nome, int totalPontos, int tentativas, int qtdeGiros, boolean vezDeJogar) {
         this.nome = nome;
         this.totalPontos = totalPontos;
@@ -35,6 +42,7 @@ public class Jogadores {
         this.qtdeGiros = qtdeGiros;
         this.vezDeJogar = vezDeJogar;
     }
+    
 
     public String getNome() {
         return nome;
@@ -127,4 +135,11 @@ public class Jogadores {
             i++;
         }
     }
+//
+//    @Override
+//    public void atualizarDados() {
+//        System.out.println("Não faz nada, jogador");
+//    }
+    
+    
 }

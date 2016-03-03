@@ -2,7 +2,7 @@
  * Implementação do Strategy
    Classe RoletaStrategy executa o Padrão Strategy.
  */
-package rodaroda.strategy;
+package rodaroda;
 
 import rodaroda.Jogadores;
 

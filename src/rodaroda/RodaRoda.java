@@ -4,39 +4,61 @@
  */
 package rodaroda;
 
-import rodaroda.strategy.RoletaAleatoria;
-import rodaroda.strategy.RoletaStrategy;
-import rodaroda.strategy.RoletaViciada;
+import java.util.Scanner;
 
 /**
  *
  * @author Kleudson
  */
 public class RodaRoda {
+
     Palavras palavra = new Palavras();
-    Parametros parametro = new Parametros();
-    
+    //   Parametros parametro = new Parametros();
+    SujeitoAtualizar sujeito = new SujeitoAtualizar();
+    ParametrosObserver parametro = new ParametrosObserver(sujeito);
+    String palavraSorteada1 = "";
+    String palavraSorteada2 = "";
+    String palavraSorteada3 = "";
     //Métodos responsável por Iniciar o Jogo para um jogador, passando vários parâmetros;
+//   
+//    public RodaRoda (SujeitoAtualizar sujeito) {
+//        this.subject = sujeito;
+//        this.subject.addObserver(this);
+//    }
     public void iniciarJogo(int qtdeJogadores, Jogadores jogador, String palavraSorteada, boolean roletaViciada) {
         String valorSorteadoRoleta = "";
         String palavraCompleta = "";
+        String girar = "";
+        int tamanhoPalavraGirar = 0;
+        boolean eAphaG = false;
         int tamanhoPalavra = palavraSorteada.length();
         char letrasCertas[] = new char[tamanhoPalavra];
         char[] letrasPalavraSorteada = new char[tamanhoPalavra];
         char[] letra;
         char letraTeste = 0;
+        Scanner sc = new Scanner(System.in);
         RoletaStrategy roletaStrategy = new RoletaStrategy(new RoletaViciada());
 
         while (jogador.getTentativas() > 0) {
             String palavraFormada = "";
             int letraErrada = 0;
-            
-            if (roletaViciada){
-               valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador);
+
+            do {
+                System.out.println("Aperte 'G' para Girar a roleta");
+                girar = sc.nextLine();
+                eAphaG = isAlphaG(girar);
+                if (eAphaG) {
+                    tamanhoPalavraGirar = girar.length();
+                    System.out.println("Roda a Roda! Roda a Roda! Rodando... rodando...");
+                }
+            } while ((tamanhoPalavraGirar < 1) || (tamanhoPalavraGirar > 1) || (eAphaG != true));
+
+            if (roletaViciada) {
+                valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador);
             } else {
                 roletaStrategy = new RoletaStrategy(new RoletaAleatoria());
                 valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador);
-            }  
+            }
 
             System.out.println("");
             System.out.println("Foi Sorteado: " + valorSorteadoRoleta);
@@ -44,11 +66,11 @@ public class RodaRoda {
             if (valorSorteadoRoleta.equals("Perde Tudo")) {
                 jogador.setTentativas(jogador.getTentativas() - 1);
                 jogador.setTotalPontos(0);
-                parametro.frasePerdeTudo(jogador.getTentativas());
+                sujeito.setNotificacao(jogador, "PerdeTudo");
 
             } else if (valorSorteadoRoleta.equals("Passa a Vez")) {
                 jogador.setTentativas(jogador.getTentativas() - 1);
-                parametro.frasePassaVez(jogador.getTentativas());
+                sujeito.setNotificacao(jogador, "PassaVez");
             } else {
                 letra = palavra.letrasPalavra();
 
@@ -56,11 +78,11 @@ public class RodaRoda {
 
                 if (palavraCompleta.length() > 1) {
                     if (palavraCompleta.equals(palavraSorteada)) {
-                        parametro.frasePalavraCorreta(jogador.getNome());
+                        sujeito.setNotificacao(jogador, "PalavraCorreta");
                         break;
                     } else {
                         jogador.setTentativas(jogador.getTentativas() - 1);
-                        parametro.frasePalavraIncorreta(jogador.getTentativas());
+                        sujeito.setNotificacao(jogador, "PalavraIncorreta");
                         continue;
                     }
                 }
@@ -76,6 +98,7 @@ public class RodaRoda {
                 for (int x = 0; x < tamanhoPalavra; x++) {
                     if (letraTeste == letrasPalavraSorteada[x]) {
                         letrasCertas[x] = letraTeste;
+                        jogador.setTotalPontos(jogador.getTotalPontos() + Integer.parseInt(valorSorteadoRoleta));
                     } else {
                         letraErrada++;
                     }
@@ -91,29 +114,28 @@ public class RodaRoda {
                 if (letraErrada >= tamanhoPalavra) {
                     jogador.setTentativas(jogador.getTentativas() - 1);
                     System.out.println("");
-                    parametro.fraseLetraIncorreta(jogador.getTentativas());
-                    System.out.println("A pontuação atual do(a) " + jogador.getNome() + " é: " + jogador.getTotalPontos());
+                    sujeito.setNotificacao(jogador, "LetraIncorreta");
+                    sujeito.setNotificacao(jogador, "PontuacaoAtual");
                     continue;
                 }
 
                 if (palavraFormada.equals(palavraSorteada)) {
-                    parametro.frasePalavraCorreta(jogador.getNome());
+                    sujeito.setNotificacao(jogador, "PalavraCorreta");
                     break;
                 }
-
-                jogador.setTotalPontos(jogador.getTotalPontos() + Integer.parseInt(valorSorteadoRoleta));
                 System.out.println("");
             }
-
-            System.out.println("A pontuação atual do(a) " + jogador.getNome() + " é: " + jogador.getTotalPontos());
+            sujeito.setNotificacao(jogador, "PontuacaoAtual");
         }
     }
-    
-    //Métodos responsável por Iniciar o Jogo para dois jogadores, passando vários parâmetros necessários;
 
+    //Métodos responsável por Iniciar o Jogo para dois jogadores, passando vários parâmetros necessários;
     public void iniciarJogoDois(int qtdeJogadores, Jogadores jogador1, Jogadores jogador2, String palavraSorteada, boolean roletaViciada) {
         String valorSorteadoRoleta = "";
         String palavraCompleta = "";
+        String girar = "";
+        int tamanhoPalavraGirar = 0;
+        boolean eAphaG = false;
         int tamanhoPalavra = palavraSorteada.length();
         char letrasCertas[] = new char[tamanhoPalavra];
         char[] letrasPalavraSorteada = new char[tamanhoPalavra];
@@ -121,19 +143,31 @@ public class RodaRoda {
         char letraTeste = 0;
         int vezJogador = 0;
         boolean fimDeJogo = false;
+        Scanner sc = new Scanner(System.in);
         RoletaStrategy roletaStrategy = new RoletaStrategy(new RoletaViciada());
 
         while (fimDeJogo == false) {
-
+            
             if (vezJogador == 0) {
                 jogador1.setVezDeJogar(true);
                 jogador2.setVezDeJogar(false);
                 System.out.println("");
-                parametro.fraseVezJogar(jogador1.getNome(), jogador1.getTotalPontos());
+
+                sujeito.setNotificacao(jogador1, "vezJogar");
 
                 String palavraFormada = "";
                 int letraErrada = 0;
-                
+
+                do {
+                    System.out.println("Aperte 'G' para Girar a roleta");
+                    girar = sc.nextLine();
+                    eAphaG = isAlphaG(girar);
+                    if (eAphaG) {
+                        tamanhoPalavraGirar = girar.length();
+                        System.out.println("Roda a Roda! Roda a Roda! Rodando... rodando...");
+                    }
+                } while ((tamanhoPalavraGirar < 1) || (tamanhoPalavraGirar > 1) || (eAphaG != true));
+
                 if (roletaViciada) {
                     valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador1);
                 } else {
@@ -146,12 +180,12 @@ public class RodaRoda {
 
                 if (valorSorteadoRoleta.equals("Perde Tudo")) {
                     jogador1.setTotalPontos(0);
-                    parametro.frasePerdeTudoMultiplayer();
+                    sujeito.setNotificacao(jogador1, "PerdeTudoMultiplayer");
                     vezJogador++;
                     continue;
 
                 } else if (valorSorteadoRoleta.equals("Passa a Vez")) {
-                    parametro.frasePassaVezMultiplayer();
+                    sujeito.setNotificacao(jogador1, "PassaVezMultiplayer");
                     vezJogador++;
                     continue;
                 } else {
@@ -161,11 +195,11 @@ public class RodaRoda {
 
                     if (palavraCompleta.length() > 1) {
                         if (palavraCompleta.equals(palavraSorteada)) {
-                            parametro.frasePalavraCorreta(jogador1.getNome());
-                            fimDeJogo = true;
+                            sujeito.setNotificacao(jogador1, "PalavraCorreta");
+//                            fimDeJogo = true;
                             break;
                         } else {
-                            parametro.frasePalavraIncorretaMultiplayer();
+                            sujeito.setNotificacao(jogador1, "PalavraIncorretaMultiplayer");
                             vezJogador++;
                             continue;
                         }
@@ -197,28 +231,38 @@ public class RodaRoda {
 
                     if (letraErrada >= tamanhoPalavra) {
                         System.out.println("");
-                        parametro.fraseLetraIncorretaMultiplayer();
-                        parametro.frasePontuacaoAtual(jogador1.getNome().toUpperCase(), jogador1.getTotalPontos());
+                        sujeito.setNotificacao(jogador1, "LetraIncorretaMultiplayer");
+                        sujeito.setNotificacao(jogador1, "PontuacaoAtual");
                         vezJogador++;
                         continue;
                     }
 
                     if (palavraFormada.equals(palavraSorteada)) {
-                        parametro.frasePalavraCorreta(jogador1.getNome());
-                        fimDeJogo = true;
+                        sujeito.setNotificacao(jogador1, "PalavraCorreta");
+//                        fimDeJogo = true;
                         break;
                     }
                     System.out.println("");
                 }
-                parametro.frasePontuacaoAtual(jogador1.getNome().toUpperCase(), jogador1.getTotalPontos());
+                sujeito.setNotificacao(jogador1, "PontuacaoAtual");
             } else {
                 jogador1.setVezDeJogar(false);
                 jogador2.setVezDeJogar(true);
                 System.out.println("");
-                parametro.fraseVezJogar(jogador2.getNome(), jogador2.getTotalPontos());
+                sujeito.setNotificacao(jogador2, "vezJogar");
                 String palavraFormada = "";
                 int letraErrada = 0;
-                
+
+                do {
+                    System.out.println("Aperte 'G' para Girar a roleta");
+                    girar = sc.nextLine();
+                    eAphaG = isAlphaG(girar);
+                    if (eAphaG) {
+                        tamanhoPalavraGirar = girar.length();
+                        System.out.println("Roda a Roda! Roda a Roda! Rodando... rodando...");
+                    }
+                } while ((tamanhoPalavraGirar < 1) || (tamanhoPalavraGirar > 1) || (eAphaG != true));
+
                 if (roletaViciada) {
                     valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador2);
                 } else {
@@ -231,7 +275,7 @@ public class RodaRoda {
 
                 if (valorSorteadoRoleta.equals("Perde Tudo")) {
                     jogador2.setTotalPontos(0);
-                    parametro.frasePerdeTudoMultiplayer();
+                    sujeito.setNotificacao(jogador2, "PerdeTudoMultiplayer");
                     vezJogador--;
                     continue;
 
@@ -246,11 +290,11 @@ public class RodaRoda {
 
                     if (palavraCompleta.length() > 1) {
                         if (palavraCompleta.equals(palavraSorteada)) {
-                            parametro.frasePalavraCorreta(jogador2.getNome());
-                            fimDeJogo = true;
+                            sujeito.setNotificacao(jogador2, "PontuacaoAtual");
+//                            fimDeJogo = true;
                             break;
                         } else {
-                            parametro.frasePalavraIncorretaMultiplayer();
+                            sujeito.setNotificacao(jogador2, "PalavraIncorretaMultiplayer");
                             vezJogador--;
                             continue;
                         }
@@ -282,20 +326,20 @@ public class RodaRoda {
 
                     if (letraErrada >= tamanhoPalavra) {
                         System.out.println("");
-                        parametro.fraseLetraIncorretaMultiplayer();
-                        parametro.frasePontuacaoAtual(jogador2.getNome(), jogador2.getTotalPontos());
+                        sujeito.setNotificacao(jogador2, "LetraIncorretaMultiplayer");
+                        sujeito.setNotificacao(jogador2, "PontuacaoAtual");
                         vezJogador--;
                         continue;
                     }
 
                     if (palavraFormada.equals(palavraSorteada)) {
-                        parametro.frasePalavraCorreta(jogador2.getNome());
-                        fimDeJogo = true;
+                        sujeito.setNotificacao(jogador2, "PalavraCorreta");
+//                        fimDeJogo = true;
                         break;
                     }
                     System.out.println("");
                 }
-                parametro.frasePontuacaoAtual(jogador2.getNome(), jogador2.getTotalPontos());
+                sujeito.setNotificacao(jogador2, "PontuacaoAtual");
             }
         }
     }
@@ -304,6 +348,9 @@ public class RodaRoda {
     public void iniciarJogoTres(int qtdeJogadores, Jogadores jogador1, Jogadores jogador2, Jogadores jogador3, String palavraSorteada, boolean roletaViciada) {
         String valorSorteadoRoleta = "";
         String palavraCompleta = "";
+        String girar = "";
+        int tamanhoPalavraGirar = 0;
+        boolean eAphaG = false;
         int tamanhoPalavra = palavraSorteada.length();
         char letrasCertas[] = new char[tamanhoPalavra];
         char[] letrasPalavraSorteada = new char[tamanhoPalavra];
@@ -311,6 +358,7 @@ public class RodaRoda {
         char letraTeste = 0;
         int vezJogador = 0;
         boolean fimDeJogo = false;
+        Scanner sc = new Scanner(System.in);
         RoletaStrategy roletaStrategy = new RoletaStrategy(new RoletaViciada());
 
         while (fimDeJogo == false) {
@@ -320,11 +368,22 @@ public class RodaRoda {
                 jogador2.setVezDeJogar(false);
                 jogador3.setVezDeJogar(false);
                 System.out.println("");
-                parametro.fraseVezJogar(jogador1.getNome(), jogador1.getTotalPontos());
+
+                sujeito.setNotificacao(jogador1, "vezJogar");
 
                 String palavraFormada = "";
                 int letraErrada = 0;
-                
+
+                do {
+                    System.out.println("Aperte 'G' para Girar a roleta");
+                    girar = sc.nextLine();
+                    eAphaG = isAlphaG(girar);
+                    if (eAphaG) {
+                        tamanhoPalavraGirar = girar.length();
+                        System.out.println("Roda a Roda! Roda a Roda! Rodando... rodando...");
+                    }
+                } while ((tamanhoPalavraGirar < 1) || (tamanhoPalavraGirar > 1) || (eAphaG != true));
+
                 if (roletaViciada) {
                     valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador1);
                 } else {
@@ -337,12 +396,12 @@ public class RodaRoda {
 
                 if (valorSorteadoRoleta.equals("Perde Tudo")) {
                     jogador1.setTotalPontos(0);
-                    parametro.frasePerdeTudoMultiplayer();
+                    sujeito.setNotificacao(jogador1, "PerdeTudoMultiplayer");
                     vezJogador++;
                     continue;
 
                 } else if (valorSorteadoRoleta.equals("Passa a Vez")) {
-                    parametro.frasePassaVezMultiplayer();
+                    sujeito.setNotificacao(jogador1, "PassaVezMultiplayer");
                     vezJogador++;
                     continue;
                 } else {
@@ -352,11 +411,11 @@ public class RodaRoda {
 
                     if (palavraCompleta.length() > 1) {
                         if (palavraCompleta.equals(palavraSorteada)) {
-                            parametro.frasePalavraCorreta(jogador1.getNome());
+                            sujeito.setNotificacao(jogador1, "PalavraCorreta");
                             fimDeJogo = true;
                             break;
                         } else {
-                            parametro.frasePalavraIncorretaMultiplayer();
+                            sujeito.setNotificacao(jogador1, "PalavraIncorretaMultiplayer");
                             vezJogador++;
                             continue;
                         }
@@ -388,30 +447,40 @@ public class RodaRoda {
 
                     if (letraErrada >= tamanhoPalavra) {
                         System.out.println("");
-                        parametro.fraseLetraIncorretaMultiplayer();
-                        parametro.frasePontuacaoAtual(jogador1.getNome().toUpperCase(), jogador1.getTotalPontos());
+                        sujeito.setNotificacao(jogador1, "LetraIncorretaMultiplayer");
+                        sujeito.setNotificacao(jogador1, "PontuacaoAtual");
                         vezJogador++;
                         continue;
                     }
 
                     if (palavraFormada.equals(palavraSorteada)) {
-                        parametro.frasePalavraCorreta(jogador1.getNome());
+                        sujeito.setNotificacao(jogador1, "PalavraCorreta");
                         fimDeJogo = true;
                         break;
                     }
                     System.out.println("");
                 }
-                parametro.frasePontuacaoAtual(jogador1.getNome().toUpperCase(), jogador1.getTotalPontos());
+                sujeito.setNotificacao(jogador1, "PontuacaoAtual");
             } else if (vezJogador == 1) {
                 jogador1.setVezDeJogar(false);
                 jogador2.setVezDeJogar(true);
                 jogador3.setVezDeJogar(false);
-                
+
                 System.out.println("");
-                parametro.fraseVezJogar(jogador2.getNome(), jogador2.getTotalPontos());
+                sujeito.setNotificacao(jogador2, "vezJogar");
                 String palavraFormada = "";
                 int letraErrada = 0;
-                
+
+                do {
+                    System.out.println("Aperte 'G' para Girar a roleta");
+                    girar = sc.nextLine();
+                    eAphaG = isAlphaG(girar);
+                    if (eAphaG) {
+                        tamanhoPalavraGirar = girar.length();
+                        System.out.println("Roda a Roda! Roda a Roda! Rodando... rodando...");
+                    }
+                } while ((tamanhoPalavraGirar < 1) || (tamanhoPalavraGirar > 1) || (eAphaG != true));
+
                 if (roletaViciada) {
                     valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador2);
                 } else {
@@ -424,12 +493,12 @@ public class RodaRoda {
 
                 if (valorSorteadoRoleta.equals("Perde Tudo")) {
                     jogador2.setTotalPontos(0);
-                    parametro.frasePerdeTudoMultiplayer();
+                    sujeito.setNotificacao(jogador2, "PerdeTudoMultiplayer");
                     vezJogador++;
                     continue;
 
                 } else if (valorSorteadoRoleta.equals("Passa a Vez")) {
-                    parametro.frasePassaVezMultiplayer();
+                    sujeito.setNotificacao(jogador2, "PassaVezMultiplayer");
                     vezJogador++;
                     continue;
                 } else {
@@ -439,11 +508,11 @@ public class RodaRoda {
 
                     if (palavraCompleta.length() > 1) {
                         if (palavraCompleta.equals(palavraSorteada)) {
-                            parametro.frasePalavraCorreta(jogador2.getNome());
+                            sujeito.setNotificacao(jogador2, "PalavraCorreta");
                             fimDeJogo = true;
                             break;
                         } else {
-                            parametro.frasePalavraIncorretaMultiplayer();
+                            sujeito.setNotificacao(jogador2, "PalavraIncorretaMultiplayer");
                             vezJogador++;
                             continue;
                         }
@@ -475,30 +544,40 @@ public class RodaRoda {
 
                     if (letraErrada >= tamanhoPalavra) {
                         System.out.println("");
-                        parametro.fraseLetraIncorretaMultiplayer();
-                        parametro.frasePontuacaoAtual(jogador2.getNome(), jogador2.getTotalPontos());
+                        sujeito.setNotificacao(jogador2, "LetraIncorretaMultiplayer");
+                        sujeito.setNotificacao(jogador2, "PontuacaoAtual");
                         vezJogador++;
                         continue;
                     }
 
                     if (palavraFormada.equals(palavraSorteada)) {
-                        parametro.frasePalavraCorreta(jogador2.getNome());
+                        sujeito.setNotificacao(jogador2, "PalavraCorreta");
                         fimDeJogo = true;
                         break;
                     }
                     System.out.println("");
                 }
-                parametro.frasePontuacaoAtual(jogador2.getNome(), jogador2.getTotalPontos());
+                sujeito.setNotificacao(jogador2, "PontuacaoAtual");
             } else {
                 jogador1.setVezDeJogar(false);
                 jogador2.setVezDeJogar(false);
                 jogador3.setVezDeJogar(true);
-                
+
                 System.out.println("");
-                parametro.fraseVezJogar(jogador3.getNome(), jogador3.getTotalPontos());
+                sujeito.setNotificacao(jogador3, "vezJogar");
                 String palavraFormada = "";
                 int letraErrada = 0;
-                
+
+                do {
+                    System.out.println("Aperte 'G' para Girar a roleta");
+                    girar = sc.nextLine();
+                    eAphaG = isAlphaG(girar);
+                    if (eAphaG) {
+                        tamanhoPalavraGirar = girar.length();
+                        System.out.println("Roda a Roda! Roda a Roda! Rodando... rodando...");
+                    }
+                } while ((tamanhoPalavraGirar < 1) || (tamanhoPalavraGirar > 1) || (eAphaG != true));
+
                 if (roletaViciada) {
                     valorSorteadoRoleta = roletaStrategy.executaStrategy(jogador3);
                 } else {
@@ -511,12 +590,12 @@ public class RodaRoda {
 
                 if (valorSorteadoRoleta.equals("Perde Tudo")) {
                     jogador3.setTotalPontos(0);
-                    parametro.frasePerdeTudoMultiplayer();
+                    sujeito.setNotificacao(jogador3, "PerdeTudoMultiplayer");
                     vezJogador = vezJogador - 2;
                     continue;
 
                 } else if (valorSorteadoRoleta.equals("Passa a Vez")) {
-                    parametro.frasePassaVezMultiplayer();
+                    sujeito.setNotificacao(jogador3, "PassaVezMultiplayer");
                     vezJogador = vezJogador - 2;
                     continue;
                 } else {
@@ -526,12 +605,12 @@ public class RodaRoda {
 
                     if (palavraCompleta.length() > 1) {
                         if (palavraCompleta.equals(palavraSorteada)) {
-                            parametro.frasePalavraCorreta(jogador3.getNome());
+                            sujeito.setNotificacao(jogador3, "PalavraCorreta");
                             fimDeJogo = true;
                             break;
                         } else {
-                            parametro.frasePalavraIncorretaMultiplayer();
-                            vezJogador = vezJogador -2;
+                            sujeito.setNotificacao(jogador3, "PalavraIncorretaMultiplayer");
+                            vezJogador = vezJogador - 2;
                             continue;
                         }
                     }
@@ -562,21 +641,27 @@ public class RodaRoda {
 
                     if (letraErrada >= tamanhoPalavra) {
                         System.out.println("");
-                        parametro.fraseLetraIncorretaMultiplayer();
-                        parametro.frasePontuacaoAtual(jogador3.getNome(), jogador3.getTotalPontos());
-                        vezJogador = vezJogador -2;
+                        sujeito.setNotificacao(jogador3, "LetraIncorretaMultiplayer");
+                        sujeito.setNotificacao(jogador3, "PontuacaoAtual");
+                        vezJogador = vezJogador - 2;
                         continue;
                     }
 
                     if (palavraFormada.equals(palavraSorteada)) {
-                        parametro.frasePalavraCorreta(jogador3.getNome());
+                        sujeito.setNotificacao(jogador3, "PalavraCorreta");
                         fimDeJogo = true;
                         break;
                     }
                     System.out.println("");
                 }
-                parametro.frasePontuacaoAtual(jogador3.getNome(), jogador3.getTotalPontos());
+                sujeito.setNotificacao(jogador3, "PontuacaoAtual");
             }
+
         }
+    }
+
+    //Métodos para limitar os caracteres aceitos
+    public boolean isAlphaG(String name) {
+        return name.matches("[g,G]+");
     }
 }

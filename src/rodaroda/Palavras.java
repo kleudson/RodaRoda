@@ -7,13 +7,22 @@ package rodaroda;
 import java.util.List;
 import java.util.Scanner;
 
+
 /**
  *
  * @author Kleudson
  */
-public class Palavras {
+public class Palavras  {
     
 //    Método sorteia uma palavra de forma aleatória.
+//    public Palavras (SujeitoAtualizar sujeito) {
+//        this.subject = sujeito;
+//        this.subject.addObserver(this);
+//    }
+//
+//    Palavras() {
+//        
+//    }
 
     public String sortearPalavra(List<String> arrayPalavras) {
         String palavraSorteada = "";
@@ -82,7 +91,7 @@ public class Palavras {
         
         return vetorLetraDigitada;
     }
-
+   
     //Métodos para limitar os caracteres aceitos
     public boolean isAlpha(String name) {
         return name.matches("[a-zA-Z@]+");
@@ -93,6 +102,12 @@ public class Palavras {
     }
     //Métodos para limitar os caracteres aceitos
     public boolean isNumero(String numero) {
-        return numero.matches("[0-9]+");
+        return numero.matches("[1-7]+");
     }
+    
+//    @Override
+//    public void atualizarDados(Jogadores jogador, Palavras palavra) {
+//        System.out.println("Atualizando Palavras");
+//        
+//    }
 }

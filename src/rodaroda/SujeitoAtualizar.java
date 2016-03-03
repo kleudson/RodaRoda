@@ -3,30 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rodaroda.Observer;
+package rodaroda;
 
 import java.util.ArrayList;
-import java.util.Observer;
-
+import rodaroda.Jogadores;
 /**
  *
  * @author Kleudson
  */
-public class SujeitoAtualizar {
+public class SujeitoAtualizar  {
     
     public ArrayList<Observer> listaObservadores = new ArrayList<Observer>();
     
-    public void setNotificacao() {
-        notificarObservadores();
+    public void setNotificacao(Jogadores jogadores, String palavraChave) {
+        notificarObservadores(jogadores, palavraChave);
     }
     
     public void addObserver (Observer observer) {
         this.listaObservadores.add(observer);
     }
     
-    public void notificarObservadores () {
+    public void notificarObservadores (Jogadores jogadores, String palavraChave) {
         for (Observer observer : listaObservadores){
-            observer.update(null, this);
+            observer.atualizarDados(jogadores, palavraChave);
         }
     }
 }

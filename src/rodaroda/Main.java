@@ -7,7 +7,6 @@ package rodaroda;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  *
@@ -35,23 +34,28 @@ public class Main {
         int qtdeGiros = 0;
         boolean vezDeJogar = false;
         boolean roletaViciada = false;
+        SujeitoAtualizar sujeito = new SujeitoAtualizar();
         Palavras palavra = new Palavras();
-        Parametros parametros = new Parametros();
+        ParametrosObserver parametroObserver = new ParametrosObserver(sujeito);
         Jogadores jogador1 = new Jogadores();
         Jogadores jogador2 = new Jogadores();
         Jogadores jogador3 = new Jogadores();
         RodaRoda rodaRoda = new RodaRoda();
+        
+        //Remover este código depois. apenas testes Observer
+        
+        System.out.println("");
 
-        qtdeJogadores = parametros.qtdeJogadores();
-        qtdeEtapas = parametros.qtdEtapas();
-        qtdePalavras = parametros.qtdePalavras();
-        tema = parametros.sortearTema();
+        qtdeJogadores = parametroObserver.qtdeJogadores();
+        qtdeEtapas = parametroObserver.qtdEtapas();
+        qtdePalavras = parametroObserver.qtdePalavras();
+        tema = parametroObserver.sortearTema();
 
-        listPalavras = parametros.escolheArquivoTxt(tema);
+        listPalavras = parametroObserver.escolheArquivoTxt(tema);
 
         palavraSorteada = palavra.sortearPalavra(listPalavras);
         
-        roletaViciada = parametros.roletaViciada();
+        roletaViciada = parametroObserver.roletaViciada();
 
         ListNomeJogadores = jogador1.nomeDosJogadores(qtdeJogadores);
 
@@ -84,7 +88,7 @@ public class Main {
                     nomeUm = iterador.next();
                     nomeDois = iterador.next();
                 }
-
+                
                 jogador1.jogadores(nomeUm, totalPontos, totalTentativas, qtdeGiros, vezDeJogar);
                 jogador2.jogadores(nomeDois, totalPontos, totalTentativas, qtdeGiros, vezDeJogar);
 
@@ -94,15 +98,15 @@ public class Main {
                 jogador1.imprimirDadosJogadoresMultiplayer(listJogadores);
                 
                 System.out.println("Dica: a palavra contém " + palavraSorteada.length() + " letras.");
-                
                 rodaRoda.iniciarJogoDois(qtdeJogadores, jogador1, jogador2, palavraSorteada, roletaViciada);
                 
                 jogador1.imprimirDadosJogadoresMultiplayer(listJogadores);
                 
+                
                 if (jogador1.getTotalPontos() > jogador2.getTotalPontos()){
-                    parametros.fraseCampeao(jogador1.getNome());
+                    parametroObserver.fraseCampeao(jogador1.getNome());
                 } else {
-                    parametros.fraseCampeao(jogador2.getNome());
+                    parametroObserver.fraseCampeao(jogador2.getNome());
                 }
 
                 
@@ -131,11 +135,11 @@ public class Main {
                 jogador1.imprimirDadosJogadoresMultiplayer(listJogadores);
                 
                 if ((jogador1.getTotalPontos() > jogador2.getTotalPontos()) && (jogador1.getTotalPontos() > jogador3.getTotalPontos())){
-                    parametros.fraseCampeao(jogador1.getNome());
+                    parametroObserver.fraseCampeao(jogador1.getNome());
                 } else if ((jogador2.getTotalPontos() > jogador1.getTotalPontos()) && (jogador2.getTotalPontos() > jogador3.getTotalPontos())) {
-                    parametros.fraseCampeao(jogador2.getNome());
+                    parametroObserver.fraseCampeao(jogador2.getNome());
                 } else {
-                    parametros.fraseCampeao(jogador3.getNome());
+                    parametroObserver.fraseCampeao(jogador3.getNome());
                 }
             }
 

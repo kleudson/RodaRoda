@@ -2,19 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Kleudson/Documents/NetBeansProjects/RodaRoda/src/rodaroda/Main.java</file>
-            <file>file:/C:/Users/Kleudson/Documents/NetBeansProjects/RodaRoda/src/rodaroda/Observer/SujeitoAtualizar.java</file>
-            <file>file:/C:/Users/Kleudson/Documents/NetBeansProjects/RodaRoda/src/rodaroda/strategy/RoletaAleatoria.java</file>
-            <file>file:/C:/Users/Kleudson/Documents/NetBeansProjects/RodaRoda/src/rodaroda/Jogadores.java</file>
-            <file>file:/C:/Users/Kleudson/Documents/NetBeansProjects/RodaRoda/src/rodaroda/RodaRoda.java</file>
-            <file>file:/C:/Users/Kleudson/Documents/NetBeansProjects/RodaRoda/src/rodaroda/Palavras.java</file>
-            <file>file:/C:/Users/Kleudson/Documents/NetBeansProjects/RodaRoda/src/rodaroda/Observer/AuditoriaObserver.java</file>
-            <file>file:/C:/Users/Kleudson/Documents/NetBeansProjects/RodaRoda/src/rodaroda/Observer/DadosObserver.java</file>
-            <file>file:/C:/Users/Kleudson/Documents/NetBeansProjects/RodaRoda/src/rodaroda/Parametros.java</file>
-            <file>file:/C:/Users/Kleudson/Documents/NetBeansProjects/RodaRoda/src/rodaroda/strategy/RoletaStrategy.java</file>
-            <file>file:/C:/Users/Kleudson/Documents/NetBeansProjects/RodaRoda/src/rodaroda/strategy/RoletaIF.java</file>
-            <file>file:/C:/Users/Kleudson/Documents/NetBeansProjects/RodaRoda/src/rodaroda/Observer/Observer.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

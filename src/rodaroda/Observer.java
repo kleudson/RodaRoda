@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rodaroda.Observer;
+package rodaroda;
+
+import rodaroda.Jogadores;
 
 /**
  *
@@ -12,5 +14,5 @@ package rodaroda.Observer;
 public abstract class Observer {
     protected SujeitoAtualizar subject;
     
-    public abstract void atualizarDados();
+    public abstract void atualizarDados(Jogadores jogador, String palavraChave);
 }

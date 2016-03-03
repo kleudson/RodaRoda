@@ -2,7 +2,7 @@
 //  Essa é a Roleta Aleatória, sempre que o jogador girar a roleta ela escolherá um valor aleatório. 
 //  Atributo qtdeGiros é monitorado
 
-package rodaroda.strategy;
+package rodaroda;
 
 import rodaroda.Jogadores;
 

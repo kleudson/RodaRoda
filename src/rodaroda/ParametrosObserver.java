@@ -1,28 +1,41 @@
 /*
- * Classe onde é carrega os parâmetros iniciais do Jogo.
-   Essa Classe também é responsável pelas frases apresentadas na aplicação.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package rodaroda;
 
-import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import rodaroda.Jogadores;
+import rodaroda.Palavras;
 
 /**
  *
  * @author Kleudson
  */
-public class Parametros {
-
+public class ParametrosObserver extends Observer {
+    
     Palavras palavra = new Palavras();
     private int qtdeJogadores;
     private int qtdePalavras;
     private int qtdeEtapas;
-    
+
     //Métodos solicita a quantidade de etapas o jogo terá
+//
+    public ParametrosObserver(SujeitoAtualizar sujeito) {
+
+        this.subject = sujeito;
+        this.subject.addObserver(this);
+    }
+
+    ParametrosObserver() {
+
+    }
 
     public int qtdEtapas() {
         Scanner sc;
@@ -42,9 +55,8 @@ public class Parametros {
 
         return qtdeEtapas;
     }
-    
-    //Métodos solicita a quantidade de palavras o jogo terá
 
+    //Métodos solicita a quantidade de palavras o jogo terá
     public int qtdePalavras() {
         Scanner sc;
         sc = new Scanner(System.in);
@@ -63,10 +75,9 @@ public class Parametros {
 
         return qtdePalavras;
     }
-    
+
 //    Método pergunta ao usuário se ele quer começar o jogo utilizando
 //    a Roleta Viciada ou Roleta Aleatória.
-
     public boolean roletaViciada() {
         Scanner sc;
         sc = new Scanner(System.in);
@@ -90,7 +101,6 @@ public class Parametros {
     }
 
     //Métodos solicita a quantidade de jogadores o jogo terá
-
     public int qtdeJogadores() {
         Scanner sc;
         sc = new Scanner(System.in);
@@ -109,9 +119,8 @@ public class Parametros {
 
         return qtdeJogadores;
     }
-    
-    //Métodos responsável por sortear o Tema
 
+    //Métodos responsável por sortear o Tema
     public String sortearTema() {
         double numeroAleatorio;
         int numeroSorteado;
@@ -136,8 +145,10 @@ public class Parametros {
         }
         return tema;
     }
+
     //Métodos responsável por carregar o arquivo correto de acordo com o tema escolhido.
     //Pois temos 3 arquivos com 20 palavras cada.
+
     public List<String> escolheArquivoTxt(String tema) {
         List<String> palavras = new ArrayList<>();
         String linha;
@@ -162,7 +173,9 @@ public class Parametros {
         }
         return palavras;
     }
+
     //Métodos responsável por converter char em String
+
     public String converteVetorCharString(char[] vetorChar) {
         String palavraString = "";
         for (int i = 0; i < vetorChar.length; i++) {
@@ -170,7 +183,9 @@ public class Parametros {
         }
         return palavraString;
     }
+
     //Métodos responsável por exibir ao usuário a frase Perde Tudo;
+
     public void frasePerdeTudo(int tentativa) {
         if (tentativa < 1) {
             System.out.println("Que Azar Heim, PERDEU TUDO!!!!!!");
@@ -179,7 +194,9 @@ public class Parametros {
             System.out.println("Mas não se preocupe, você ainda tem " + tentativa + " tentativa(s).");
         }
     }
+
     //Métodos responsável por exibir ao usuário a frase Passa a Vez
+
     public int frasePassaVez(int tentativa) {
         if (tentativa < 1) {
             System.out.println("Que Azar Heim, PASSOU A VEZ!!!");
@@ -195,7 +212,9 @@ public class Parametros {
         System.out.println("Que Azar Heim, PASSOU A VEZ!!!");
         System.out.println("");
     }
+
     //Métodos responsável por exibir ao usuário a pontuação atual
+
     public void frasePontuacaoAtual(String nome, int pontuacao) {
         System.out.println("######");
         System.out.println("######" + nome + ": " + pontuacao + " Pontos ######");
@@ -233,7 +252,7 @@ public class Parametros {
         System.out.println("*************************************************************************************");
         System.out.println("");
     }
-    
+
     //Métodos responsável por exibir ao usuário quem venceu o jogo
     public void fraseCampeao(String nome) {
         System.out.println("*************************************************************************************");
@@ -242,7 +261,7 @@ public class Parametros {
         System.out.println("");
     }
 
-        //Métodos responsável por exibir ao usuário a de quem é a vez de jogar e a pontuação
+    //Métodos responsável por exibir ao usuário a de quem é a vez de jogar e a pontuação
     public void fraseVezJogar(String nome, int pontuacao) {
         System.out.println("*****");
         System.out.println("***** " + nome.toUpperCase() + ", É A SUA VEZ DE JOGAR!! *************");
@@ -250,7 +269,7 @@ public class Parametros {
         System.out.println("*****");
     }
 
-        //Métodos responsável por exibir ao usuário a frase da Palavra Incorreta;
+    //Métodos responsável por exibir ao usuário a frase da Palavra Incorreta;
     public void frasePalavraIncorreta(int tentativa) {
         if (tentativa < 1) {
             System.out.println("Que pena, você não acertou a palavra!!!");
@@ -259,9 +278,57 @@ public class Parametros {
             System.out.println("Mas não se preocupe, você ainda tem " + tentativa + " tentativa(s).");
         }
     }
+
     //Métodos responsável por exibir ao usuário a frase da Palavra Incorreta Multiplayer
+
     public void frasePalavraIncorretaMultiplayer() {
         System.out.println("Que pena, você não acertou a palavra!!!");
     }
 
+    @Override
+    public void atualizarDados(Jogadores jogador, String palavraChave) {
+        System.out.println("");
+
+        switch (palavraChave) {
+            case "vezJogar":
+                fraseVezJogar(jogador.getNome(), jogador.getTotalPontos());
+                break;
+            case "PerdeTudoMultiplayer":
+                frasePerdeTudoMultiplayer();
+                break;
+            case "PassaVezMultiplayer":
+                frasePassaVezMultiplayer();
+                break;
+            case "PalavraCorreta":
+                frasePalavraCorreta(jogador.getNome());
+                break;
+            case "PalavraIncorretaMultiplayer":
+                frasePalavraIncorretaMultiplayer();
+                break;
+            case "LetraIncorretaMultiplayer":
+                fraseLetraIncorretaMultiplayer();
+                break;
+            case "PontuacaoAtual":
+                frasePontuacaoAtual(jogador.getNome().toUpperCase(), jogador.getTotalPontos());
+                break;
+            case "PerdeTudo":
+                frasePerdeTudo(jogador.getTentativas());
+                break;
+            case "PassaVez":
+                frasePassaVez(jogador.getTentativas());
+                break;
+            case "PalavraIncorreta":
+                frasePalavraIncorreta(jogador.getTentativas());
+                break;
+            case "LetraIncorreta":
+                fraseLetraIncorreta(jogador.getTentativas());
+                break;
+            default:
+                System.out.println("");
+                System.out.println("ERRO!!!");
+                System.out.println("Opção escolhida fora do Switch Case de Parâmetros");
+                System.out.println("Informe ao desenvolvedor do Sistema");
+                System.out.println("");
+        }
+    }
 }
