@@ -1,5 +1,5 @@
 /*
- * Classe responsável por definir se inicializará para 1 Jogador, 2 Jogadores ou 3 Jogadores
+ * 
    
  */
 package rodaroda;
@@ -8,38 +8,40 @@ import java.util.Scanner;
 
 /**
  *
- * @author Kleudson
+ * @author Kleudson Classe que inicializa o jogo para 1 Jogador, 2 Jogadores ou
+ * 3 Jogadores
  */
 public class RodaRoda {
 
     Palavras palavra = new Palavras();
-    //   Parametros parametro = new Parametros();
     SujeitoAtualizar sujeito = new SujeitoAtualizar();
     ParametrosObserver parametro = new ParametrosObserver(sujeito);
-    String palavraSorteada1 = "";
-    String palavraSorteada2 = "";
-    String palavraSorteada3 = "";
-    //Métodos responsável por Iniciar o Jogo para um jogador, passando vários parâmetros;
-//   
-//    public RodaRoda (SujeitoAtualizar sujeito) {
-//        this.subject = sujeito;
-//        this.subject.addObserver(this);
-//    }
-    public void iniciarJogo(int qtdeJogadores, Jogadores jogador, String palavraSorteada, boolean roletaViciada) {
+/*    
+//Métodos responsável por Iniciar o Jogo para um jogador, passando vários parâmetros;
+*/
+    /**
+     *
+     * @param jogador
+     * @param configuracoes
+     */
+        public void iniciarJogo(Jogadores jogador, Configuracoes configuracoes) {
+        boolean roletaViciada = configuracoes.isRoletaViciada();
+        String palavraSorteada = configuracoes.getListPalavraSorteada().get(0);
         String valorSorteadoRoleta = "";
         String palavraCompleta = "";
         String girar = "";
         int tamanhoPalavraGirar = 0;
         boolean eAphaG = false;
+        char[] letra;
+        char letraTemporaria = 0;
         int tamanhoPalavra = palavraSorteada.length();
         char letrasCertas[] = new char[tamanhoPalavra];
         char[] letrasPalavraSorteada = new char[tamanhoPalavra];
-        char[] letra;
-        char letraTeste = 0;
         Scanner sc = new Scanner(System.in);
         RoletaStrategy roletaStrategy = new RoletaStrategy(new RoletaViciada());
 
         while (jogador.getTentativas() > 0) {
+
             String palavraFormada = "";
             int letraErrada = 0;
 
@@ -49,7 +51,7 @@ public class RodaRoda {
                 eAphaG = isAlphaG(girar);
                 if (eAphaG) {
                     tamanhoPalavraGirar = girar.length();
-                    System.out.println("Roda a Roda! Roda a Roda! Rodando... rodando...");
+                    System.out.println("Roda a Roda! Roda a Roda! Rodando... girando...");
                 }
             } while ((tamanhoPalavraGirar < 1) || (tamanhoPalavraGirar > 1) || (eAphaG != true));
 
@@ -72,6 +74,7 @@ public class RodaRoda {
                 jogador.setTentativas(jogador.getTentativas() - 1);
                 sujeito.setNotificacao(jogador, "PassaVez");
             } else {
+
                 letra = palavra.letrasPalavra();
 
                 palavraCompleta = parametro.converteVetorCharString(letra);
@@ -88,7 +91,7 @@ public class RodaRoda {
                 }
 
                 for (int z = 0; z < letra.length; z++) {
-                    letraTeste = letra[z];
+                    letraTemporaria = letra[z];
                 }
 
                 for (int i = 0; i < tamanhoPalavra; i++) {
@@ -96,8 +99,8 @@ public class RodaRoda {
                 }
 
                 for (int x = 0; x < tamanhoPalavra; x++) {
-                    if (letraTeste == letrasPalavraSorteada[x]) {
-                        letrasCertas[x] = letraTeste;
+                    if (letraTemporaria == letrasPalavraSorteada[x]) {
+                        letrasCertas[x] = letraTemporaria;
                         jogador.setTotalPontos(jogador.getTotalPontos() + Integer.parseInt(valorSorteadoRoleta));
                     } else {
                         letraErrada++;
@@ -125,15 +128,25 @@ public class RodaRoda {
                 }
                 System.out.println("");
             }
+
             sujeito.setNotificacao(jogador, "PontuacaoAtual");
         }
     }
-
+/*
     //Métodos responsável por Iniciar o Jogo para dois jogadores, passando vários parâmetros necessários;
-    public void iniciarJogoDois(int qtdeJogadores, Jogadores jogador1, Jogadores jogador2, String palavraSorteada, boolean roletaViciada) {
+*/
+    /**
+     *
+     * @param jogador1
+     * @param jogador2
+     * @param configuracoes
+     */
+        public void iniciarJogoDois(Jogadores jogador1, Jogadores jogador2, Configuracoes configuracoes) {
+        boolean roletaViciada = configuracoes.isRoletaViciada();
         String valorSorteadoRoleta = "";
         String palavraCompleta = "";
         String girar = "";
+        String palavraSorteada = configuracoes.getListPalavraSorteada().get(0);
         int tamanhoPalavraGirar = 0;
         boolean eAphaG = false;
         int tamanhoPalavra = palavraSorteada.length();
@@ -147,7 +160,7 @@ public class RodaRoda {
         RoletaStrategy roletaStrategy = new RoletaStrategy(new RoletaViciada());
 
         while (fimDeJogo == false) {
-            
+
             if (vezJogador == 0) {
                 jogador1.setVezDeJogar(true);
                 jogador2.setVezDeJogar(false);
@@ -164,7 +177,7 @@ public class RodaRoda {
                     eAphaG = isAlphaG(girar);
                     if (eAphaG) {
                         tamanhoPalavraGirar = girar.length();
-                        System.out.println("Roda a Roda! Roda a Roda! Rodando... rodando...");
+                        System.out.println("Roda a Roda! Roda a Roda! Rodando... girando...");
                     }
                 } while ((tamanhoPalavraGirar < 1) || (tamanhoPalavraGirar > 1) || (eAphaG != true));
 
@@ -196,7 +209,6 @@ public class RodaRoda {
                     if (palavraCompleta.length() > 1) {
                         if (palavraCompleta.equals(palavraSorteada)) {
                             sujeito.setNotificacao(jogador1, "PalavraCorreta");
-//                            fimDeJogo = true;
                             break;
                         } else {
                             sujeito.setNotificacao(jogador1, "PalavraIncorretaMultiplayer");
@@ -239,7 +251,6 @@ public class RodaRoda {
 
                     if (palavraFormada.equals(palavraSorteada)) {
                         sujeito.setNotificacao(jogador1, "PalavraCorreta");
-//                        fimDeJogo = true;
                         break;
                     }
                     System.out.println("");
@@ -259,7 +270,7 @@ public class RodaRoda {
                     eAphaG = isAlphaG(girar);
                     if (eAphaG) {
                         tamanhoPalavraGirar = girar.length();
-                        System.out.println("Roda a Roda! Roda a Roda! Rodando... rodando...");
+                        System.out.println("Roda a Roda! Roda a Roda! Rodando... girando...");
                     }
                 } while ((tamanhoPalavraGirar < 1) || (tamanhoPalavraGirar > 1) || (eAphaG != true));
 
@@ -291,7 +302,6 @@ public class RodaRoda {
                     if (palavraCompleta.length() > 1) {
                         if (palavraCompleta.equals(palavraSorteada)) {
                             sujeito.setNotificacao(jogador2, "PontuacaoAtual");
-//                            fimDeJogo = true;
                             break;
                         } else {
                             sujeito.setNotificacao(jogador2, "PalavraIncorretaMultiplayer");
@@ -334,7 +344,6 @@ public class RodaRoda {
 
                     if (palavraFormada.equals(palavraSorteada)) {
                         sujeito.setNotificacao(jogador2, "PalavraCorreta");
-//                        fimDeJogo = true;
                         break;
                     }
                     System.out.println("");
@@ -343,9 +352,19 @@ public class RodaRoda {
             }
         }
     }
-
+/*
     //Métodos responsável por Iniciar o Jogo para três jogadores, passando vários parâmetros necessários;
-    public void iniciarJogoTres(int qtdeJogadores, Jogadores jogador1, Jogadores jogador2, Jogadores jogador3, String palavraSorteada, boolean roletaViciada) {
+*/
+    /**
+     *
+     * @param jogador1
+     * @param jogador2
+     * @param jogador3
+     * @param configuracoes
+     */
+        public void iniciarJogoTres(Jogadores jogador1, Jogadores jogador2, Jogadores jogador3, Configuracoes configuracoes) {
+        boolean roletaViciada = configuracoes.isRoletaViciada();
+        String palavraSorteada = configuracoes.getListPalavraSorteada().get(0);
         String valorSorteadoRoleta = "";
         String palavraCompleta = "";
         String girar = "";
@@ -380,7 +399,7 @@ public class RodaRoda {
                     eAphaG = isAlphaG(girar);
                     if (eAphaG) {
                         tamanhoPalavraGirar = girar.length();
-                        System.out.println("Roda a Roda! Roda a Roda! Rodando... rodando...");
+                        System.out.println("Roda a Roda! Roda a Roda! Rodando... girando...");
                     }
                 } while ((tamanhoPalavraGirar < 1) || (tamanhoPalavraGirar > 1) || (eAphaG != true));
 
@@ -477,7 +496,7 @@ public class RodaRoda {
                     eAphaG = isAlphaG(girar);
                     if (eAphaG) {
                         tamanhoPalavraGirar = girar.length();
-                        System.out.println("Roda a Roda! Roda a Roda! Rodando... rodando...");
+                        System.out.println("Roda a Roda! Roda a Roda! Rodando... girando...");
                     }
                 } while ((tamanhoPalavraGirar < 1) || (tamanhoPalavraGirar > 1) || (eAphaG != true));
 
@@ -574,7 +593,7 @@ public class RodaRoda {
                     eAphaG = isAlphaG(girar);
                     if (eAphaG) {
                         tamanhoPalavraGirar = girar.length();
-                        System.out.println("Roda a Roda! Roda a Roda! Rodando... rodando...");
+                        System.out.println("Roda a Roda! Roda a Roda! Rodando... girando...");
                     }
                 } while ((tamanhoPalavraGirar < 1) || (tamanhoPalavraGirar > 1) || (eAphaG != true));
 
@@ -659,9 +678,15 @@ public class RodaRoda {
 
         }
     }
-
+/*
     //Métodos para limitar os caracteres aceitos
-    public boolean isAlphaG(String name) {
+*/
+    /**
+     *
+     * @param name
+     * @return
+     */
+        public boolean isAlphaG(String name) {
         return name.matches("[g,G]+");
     }
 }

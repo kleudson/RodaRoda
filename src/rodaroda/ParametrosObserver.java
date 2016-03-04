@@ -11,15 +11,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import rodaroda.Jogadores;
-import rodaroda.Palavras;
 
 /**
  *
- * @author Kleudson
+ * @author Kleudson Classe Observadora. Dispara uma mensagem ao usuário quando
+ * existe alguma alteração em outras classes.
  */
 public class ParametrosObserver extends Observer {
-    
+
     Palavras palavra = new Palavras();
     private int qtdeJogadores;
     private int qtdePalavras;
@@ -27,7 +26,12 @@ public class ParametrosObserver extends Observer {
 
     //Métodos solicita a quantidade de etapas o jogo terá
 //
-    public ParametrosObserver(SujeitoAtualizar sujeito) {
+
+    /**
+     *
+     * @param sujeito
+     */
+        public ParametrosObserver(SujeitoAtualizar sujeito) {
 
         this.subject = sujeito;
         this.subject.addObserver(this);
@@ -37,6 +41,10 @@ public class ParametrosObserver extends Observer {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public int qtdEtapas() {
         Scanner sc;
         sc = new Scanner(System.in);
@@ -56,8 +64,14 @@ public class ParametrosObserver extends Observer {
         return qtdeEtapas;
     }
 
-    //Métodos solicita a quantidade de palavras o jogo terá
-    public int qtdePalavras() {
+    /*
+    Métodos solicita a quantidade de palavras o jogo terá
+    */
+    /**
+     *
+     * @return
+     */
+        public int qtdePalavras() {
         Scanner sc;
         sc = new Scanner(System.in);
         boolean eNumero = false;
@@ -76,9 +90,14 @@ public class ParametrosObserver extends Observer {
         return qtdePalavras;
     }
 
-//    Método pergunta ao usuário se ele quer começar o jogo utilizando
+/*    Método pergunta ao usuário se ele quer começar o jogo utilizando
 //    a Roleta Viciada ou Roleta Aleatória.
-    public boolean roletaViciada() {
+*/
+    /**
+     *
+     * @return
+     */
+        public boolean roletaViciada() {
         Scanner sc;
         sc = new Scanner(System.in);
         boolean booleanRoletaViciada = false;
@@ -99,9 +118,14 @@ public class ParametrosObserver extends Observer {
         } while ((stringRoletaViciada.length() != 1) || (eAlpha != true));
         return booleanRoletaViciada;
     }
-
-    //Métodos solicita a quantidade de jogadores o jogo terá
-    public int qtdeJogadores() {
+/*
+    Métodos solicita a quantidade de jogadores o jogo terá
+*/
+    /**
+     *
+     * @return
+     */
+        public int qtdeJogadores() {
         Scanner sc;
         sc = new Scanner(System.in);
         boolean eNumero = false;
@@ -119,9 +143,14 @@ public class ParametrosObserver extends Observer {
 
         return qtdeJogadores;
     }
-
-    //Métodos responsável por sortear o Tema
-    public String sortearTema() {
+/*
+    Métodos responsável por sortear o Tema
+*/
+    /**
+     *
+     * @return
+     */
+        public String sortearTema() {
         double numeroAleatorio;
         int numeroSorteado;
         String tema = "";
@@ -130,7 +159,7 @@ public class ParametrosObserver extends Observer {
         numeroAleatorio = Math.floor(numeroAleatorio);
         numeroSorteado = (int) numeroAleatorio;
 
-        switch (numeroSorteado) {//Provisório, posteriormente vai pegar de um arquivo de texto em disco.
+        switch (numeroSorteado) {
             case 0:
                 tema = "profissao";
                 break;
@@ -149,7 +178,12 @@ public class ParametrosObserver extends Observer {
     //Métodos responsável por carregar o arquivo correto de acordo com o tema escolhido.
     //Pois temos 3 arquivos com 20 palavras cada.
 
-    public List<String> escolheArquivoTxt(String tema) {
+    /**
+     *
+     * @param tema
+     * @return
+     */
+        public List<String> escolheArquivoTxt(String tema) {
         List<String> palavras = new ArrayList<>();
         String linha;
         String nomeArquivo;
@@ -173,20 +207,29 @@ public class ParametrosObserver extends Observer {
         }
         return palavras;
     }
-
+/*
     //Métodos responsável por converter char em String
-
-    public String converteVetorCharString(char[] vetorChar) {
+*/
+    /**
+     *
+     * @param vetorChar
+     * @return
+     */
+        public String converteVetorCharString(char[] vetorChar) {
         String palavraString = "";
         for (int i = 0; i < vetorChar.length; i++) {
             palavraString = palavraString + vetorChar[i];
         }
         return palavraString;
     }
-
+/*
     //Métodos responsável por exibir ao usuário a frase Perde Tudo;
-
-    public void frasePerdeTudo(int tentativa) {
+*/
+    /**
+     *
+     * @param tentativa
+     */
+        public void frasePerdeTudo(int tentativa) {
         if (tentativa < 1) {
             System.out.println("Que Azar Heim, PERDEU TUDO!!!!!!");
         } else {
@@ -194,10 +237,15 @@ public class ParametrosObserver extends Observer {
             System.out.println("Mas não se preocupe, você ainda tem " + tentativa + " tentativa(s).");
         }
     }
-
+/*
     //Métodos responsável por exibir ao usuário a frase Passa a Vez
-
-    public int frasePassaVez(int tentativa) {
+*/
+    /**
+     *
+     * @param tentativa
+     * @return
+     */
+        public int frasePassaVez(int tentativa) {
         if (tentativa < 1) {
             System.out.println("Que Azar Heim, PASSOU A VEZ!!!");
         } else {
@@ -206,30 +254,48 @@ public class ParametrosObserver extends Observer {
         }
         return tentativa;
     }
-
+/*
     //Métodos responsável por exibir ao usuário a frase passa a vez Multiplayer   
-    public void frasePassaVezMultiplayer() {
+*/
+    /**
+     *
+     */
+        public void frasePassaVezMultiplayer() {
         System.out.println("Que Azar Heim, PASSOU A VEZ!!!");
         System.out.println("");
     }
-
+/*
     //Métodos responsável por exibir ao usuário a pontuação atual
-
-    public void frasePontuacaoAtual(String nome, int pontuacao) {
+*/
+    /**
+     *
+     * @param nome
+     * @param pontuacao
+     */
+        public void frasePontuacaoAtual(String nome, int pontuacao) {
         System.out.println("######");
         System.out.println("######" + nome + ": " + pontuacao + " Pontos ######");
         System.out.println("######");
         System.out.println("");
     }
-
+/*
     //Métodos responsável por exibir ao usuário a frase Perde Tudo Multiplayer
-    public void frasePerdeTudoMultiplayer() {
+*/
+    /**
+     *
+     */
+        public void frasePerdeTudoMultiplayer() {
         System.out.println("Que Azar Heim, PERDEU TUDO!!!!!!");
         System.out.println("");
     }
-
+/*
     //Métodos responsável por exibir ao usuário a frase Letra Incorreta    
-    public void fraseLetraIncorreta(int tentativa) {
+*/
+    /**
+     *
+     * @param tentativa
+     */
+        public void fraseLetraIncorreta(int tentativa) {
         if (tentativa < 1) {
             System.out.println("Que pena, essa letra não existe na palavra!!!");
         } else {
@@ -237,40 +303,65 @@ public class ParametrosObserver extends Observer {
             System.out.println("Mas não se preocupe, você ainda tem " + tentativa + " tentativa(s).");
         }
     }
-
+/*
     //Métodos responsável por exibir ao usuário a Letra Incorreta Multiplayer    
-    public void fraseLetraIncorretaMultiplayer() {
+*/
+    /**
+     *
+     */
+        public void fraseLetraIncorretaMultiplayer() {
         System.out.println("Que pena, essa letra não existe na palavra!!!");
         System.out.println("");
     }
-
+/*
     //Métodos responsável por exibir ao usuário a frase palavra Correta    
-    public void frasePalavraCorreta(String nome) {
+*/
+    /**
+     *
+     * @param nome
+     */
+        public void frasePalavraCorreta(String nome) {
         System.out.println("");
         System.out.println("*************************************************************************************");
         System.out.println("************* PARABÉNS " + nome.toUpperCase() + ", VOCÊ ACERTOU A PALAVRA!! *************");
         System.out.println("*************************************************************************************");
         System.out.println("");
     }
-
+/*
     //Métodos responsável por exibir ao usuário quem venceu o jogo
-    public void fraseCampeao(String nome) {
+*/
+    /**
+     *
+     * @param nome
+     */
+        public void fraseCampeao(String nome) {
         System.out.println("*************************************************************************************");
         System.out.println("************* " + nome.toUpperCase() + ", VENCEU O JOGO!!! *************");
         System.out.println("*************************************************************************************");
         System.out.println("");
     }
-
+/*
     //Métodos responsável por exibir ao usuário a de quem é a vez de jogar e a pontuação
-    public void fraseVezJogar(String nome, int pontuacao) {
+*/
+    /**
+     *
+     * @param nome
+     * @param pontuacao
+     */
+        public void fraseVezJogar(String nome, int pontuacao) {
         System.out.println("*****");
         System.out.println("***** " + nome.toUpperCase() + ", É A SUA VEZ DE JOGAR!! *************");
         System.out.println("***** PONTUAÇÃO: " + pontuacao + " Pontos.");
         System.out.println("*****");
     }
-
+/*
     //Métodos responsável por exibir ao usuário a frase da Palavra Incorreta;
-    public void frasePalavraIncorreta(int tentativa) {
+*/
+    /**
+     *
+     * @param tentativa
+     */
+        public void frasePalavraIncorreta(int tentativa) {
         if (tentativa < 1) {
             System.out.println("Que pena, você não acertou a palavra!!!");
         } else {
@@ -278,14 +369,26 @@ public class ParametrosObserver extends Observer {
             System.out.println("Mas não se preocupe, você ainda tem " + tentativa + " tentativa(s).");
         }
     }
-
+/*
     //Métodos responsável por exibir ao usuário a frase da Palavra Incorreta Multiplayer
-
-    public void frasePalavraIncorretaMultiplayer() {
+*/
+    /**
+     *
+     */
+        public void frasePalavraIncorretaMultiplayer() {
         System.out.println("Que pena, você não acertou a palavra!!!");
     }
-
-    @Override
+/*
+//    Método AtualizarDados responsável por mensagens na tela.
+//    Execução do Padrão Observer.
+//    Classe observa o estado e dispara uma mensagem de acordo com alteração do estado e quando ouver alteração.
+*/
+    /**
+     *
+     * @param jogador
+     * @param palavraChave
+     */
+        @Override
     public void atualizarDados(Jogadores jogador, String palavraChave) {
         System.out.println("");
 

@@ -1,46 +1,51 @@
-/*
- * Classe trata as palavras Sorteadas e confere cada caracter para saber se o usuário acertou a letra ou não.
-   Essa classe tem alguns métodos de formatação de texto. 
-*/
 package rodaroda;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
 /**
  *
- * @author Kleudson
+ * @author Kleudson Classe trata as palavras Sorteadas e confere cada caracter
+ * para saber se o usuário acertou a letra ou não. Essa classe tem alguns
+ * métodos de formatação de texto.
  */
-public class Palavras  {
-    
-//    Método sorteia uma palavra de forma aleatória.
-//    public Palavras (SujeitoAtualizar sujeito) {
-//        this.subject = sujeito;
-//        this.subject.addObserver(this);
-//    }
-//
-//    Palavras() {
-//        
-//    }
+public class Palavras {
 
-    public String sortearPalavra(List<String> arrayPalavras) {
-        String palavraSorteada = "";
+    /**
+     *
+     * @param arrayPalavras
+     * @param qtdePalavras
+     * @return
+     */
+    public List<String> sortearPalavra(List<String> arrayPalavras, int qtdePalavras) {
         double numeroAleatorio;
         int numeroSorteado;
+        List<String> listPalavraSorteada = new ArrayList<>();
+        List<Integer> listNumeroSorteado = new ArrayList<>(qtdePalavras);
 
-        numeroAleatorio = Math.random() * arrayPalavras.size();
-        numeroAleatorio = Math.floor(numeroAleatorio);
-        numeroSorteado = (int) numeroAleatorio;
+        while (qtdePalavras != 0) {
 
-        palavraSorteada = arrayPalavras.set(numeroSorteado, "");
+            numeroAleatorio = Math.random() * arrayPalavras.size();
+            numeroAleatorio = Math.floor(numeroAleatorio);
+            numeroSorteado = (int) numeroAleatorio;
+            if (!listNumeroSorteado.contains(numeroSorteado)) {
+                listNumeroSorteado.add(numeroSorteado);
+                listPalavraSorteada.add(arrayPalavras.set(numeroSorteado, ""));
+                qtdePalavras--;
+            }
+        }
 
-        return palavraSorteada;
+        return listPalavraSorteada;
     }
-//    
-//    Método solicita a entrada de uma letra para comparar com a palavra que foi sorteada
-//    Também evita que o usuário digite caracteres incorretos
-
+/*    
+ *    Método solicita a entrada de uma letra para comparar com a palavra que foi sorteada
+ *    Também evita que o usuário digite caracteres incorretos
+ */
+    /**
+     *
+     * @return
+     */
     public char[] letrasPalavra() {
         char[] vetorLetraDigitada;
         char[] vetorPalavraDigitada;
@@ -83,31 +88,46 @@ public class Palavras  {
 
             }
         } while (tamanhoPalavra != 1);
-        
+
         vetorLetraDigitada = new char[tamanhoPalavra];
         for (int y = 0; y < letraDigitada.length(); y++) {
             vetorLetraDigitada[y] = letraDigitada.charAt(y);
         }
-        
+
         return vetorLetraDigitada;
     }
-   
-    //Métodos para limitar os caracteres aceitos
-    public boolean isAlpha(String name) {
+
+
+    /**
+     *Métodos para limitar os caracteres aceitos
+     * @param name
+     * @return
+     */
+        public boolean isAlpha(String name) {
         return name.matches("[a-zA-Z@]+");
     }
-    //Métodos para limitar os caracteres aceitos
+
+
+    /**
+     *Métodos para limitar os caracteres aceitos
+     * @param letra
+     * @return
+     */
+    
     public boolean isAlphaVezDeJogar(String letra) {
         return letra.matches("[s,n,S,N]+");
     }
-    //Métodos para limitar os caracteres aceitos
+
+
+
+    /**
+     *Métodos para limitar os caracteres aceitos
+     * @param numero
+     * @return
+     */
+    
     public boolean isNumero(String numero) {
         return numero.matches("[1-7]+");
     }
-    
-//    @Override
-//    public void atualizarDados(Jogadores jogador, Palavras palavra) {
-//        System.out.println("Atualizando Palavras");
-//        
-//    }
+
 }

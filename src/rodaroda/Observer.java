@@ -9,10 +9,20 @@ import rodaroda.Jogadores;
 
 /**
  *
- * @author Kleudson
+ * @author Kleudson Método principal da classe abstrata Observer. Responsável
+ * por atualizar os dados dos Observadores
  */
 public abstract class Observer {
+
+    /**
+     *
+     */
     protected SujeitoAtualizar subject;
-    
+
+    /**
+     *
+     * @param jogador
+     * @param palavraChave
+     */
     public abstract void atualizarDados(Jogadores jogador, String palavraChave);
 }

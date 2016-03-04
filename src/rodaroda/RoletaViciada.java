@@ -1,26 +1,29 @@
-/*
- *Foi pedido duas Estratégias diferentes para a roleta. Viciada e Aleatória.
-  Essa é a roleta Viciada, sempre que o jogador girar a roleta pela segunda vez, irá passar a vez. 
-  Atributo qtdeGiros é monitorado
- */
 package rodaroda;
 
 import rodaroda.Jogadores;
 
 /**
  *
- * @author Kleudson
+ * @author Kleudson Foi abordado duas estratégias de giro da roleta. Uma Viciada
+ * e outra Aleatória. Essa classe é responsável por implementar a roleta
+ * Viciada. Sempre que o usuário girar a roleta pela segunda vez, irá passar a
+ * vez. Atributo qtdeGiros é monitorado
  */
 public class RoletaViciada implements RoletaIF {
 
+    /**
+     *
+     * @param jogadores
+     * @return
+     */
     public String sortear(Jogadores jogadores) {
         double numero_aleatorio;
         int numeroSorteado;
 
         if (jogadores.getQtdeGiros() != 1) {
-            
+
             jogadores.setQtdeGiros(jogadores.getQtdeGiros() + 1);
-            
+
             numero_aleatorio = Math.random() * 20;
             numero_aleatorio = Math.floor(numero_aleatorio);
             numeroSorteado = (int) numero_aleatorio;
@@ -53,7 +56,7 @@ public class RoletaViciada implements RoletaIF {
         } else {
             String passaVez = "Passa a Vez";
             jogadores.setQtdeGiros(0);
-            return  passaVez;
+            return passaVez;
         }
     }
 }

@@ -1,16 +1,18 @@
-//Foi pedido duas Estratégias diferentes para a roleta. Viciada e Aleatória.
-//  Essa é a Roleta Aleatória, sempre que o jogador girar a roleta ela escolherá um valor aleatório. 
-//  Atributo qtdeGiros é monitorado
-
 package rodaroda;
-
-import rodaroda.Jogadores;
 
 /**
  *
- * @author Kleudson
+ * @author Kleudson Foi abordado duas estratégias de giro da roleta. Uma Viciada
+ * e outra Aleatória. Essa classe é responsável por implementar a roleta
+ * Aleatória. Atributo qtdeGiros é monitorado
  */
-public class RoletaAleatoria implements RoletaIF{
+public class RoletaAleatoria implements RoletaIF {
+
+    /**
+     *
+     * @param jogadores
+     * @return
+     */
     public String sortear(Jogadores jogadores) {
         double numero_aleatorio;
         int numeroSorteado;
